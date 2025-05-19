@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  label.required:after,
+  h5.rquired:after {
+    content: " *";
+  }
+
+  [disabled],
+  .disabled {
+    background-color: #dcdee2;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  * {
+    print-color-adjust: exact;
+  }
+
+  @media print {
+    @page {
+      margin: 0; /* Remove default margins */
+    }
+  }
+}
+
+#modal-background {
+  z-index: 50 !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.ss-open {
+  z-index: 20000;
+}

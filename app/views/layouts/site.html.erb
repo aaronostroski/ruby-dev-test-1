@@ -1,0 +1,15 @@
+<% content_for :content do %>
+  <%= render "layouts/site/mobile_sidebar" %>
+  <%= render "layouts/site/sidebar" %>
+
+  <div class="md:pl-64 flex flex-col flex-1">
+    <%= render "layouts/site/navbar" %>
+    <main>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8">
+        <%= yield %>
+      </div>
+    </main>
+  </div>
+<% end %>
+
+<%= render template: "layouts/site" %>
