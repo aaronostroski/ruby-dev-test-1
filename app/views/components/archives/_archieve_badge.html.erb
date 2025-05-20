@@ -1,0 +1,18 @@
+<%
+  icons = {
+    "image/png" => "fa-solid fa-image",
+    "image/jpeg" => "fa-solid fa-image",
+    "application/pdf" => "fa-solid fa-file-pdf",
+    "application/zip" => "fa-solid fa-file-archive",
+    "text/csv" => "fa-solid fa-file-csv",
+  }
+  
+  icon = icons[archive.type] || "fa-solid fa-file"
+%>
+
+<div>
+  <i class="<%= archive.type %> w-auto h-6 mr-2"></i>
+  <h1 class="text-2xl font-semibold text-gray-900">
+    <%= archive.name %>
+  </h1>
+</div>

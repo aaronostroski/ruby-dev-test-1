@@ -1,5 +1,6 @@
 pt-BR:
   views:
     defaults:
-      created_at: Criado em
-      updated_at: Atualizado em
+      sucessfully_created: Criado com sucesso
+      save: Salvar
+      back: Voltar

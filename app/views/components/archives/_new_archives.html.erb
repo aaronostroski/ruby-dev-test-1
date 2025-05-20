@@ -1,0 +1,14 @@
+<div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+  <%= link_to(new_site_archive_path, data: { turbo_frame: 'modal' }, class: "bg-gray-100 h-52 w-full flex items-center justify-center rounded-t-lg") do %>
+    <i class="fa-solid fa-file-export h-36"></i>
+  <% end %>
+  <div class="p-5">
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+        <%= t("views.components.new_archives.description") %>
+      </p>
+      <%= link_to(new_site_archive_path, data: { turbo_frame: 'modal' }, class: "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-500 rounded-lg transition-all hover:opacity-75 focus:ring-4 focus:outline-none") do %>
+        <%= t('views.components.new_archives.button') %>
+        <i class="ml-2 fa-solid fa-arrow-right"></i>
+      <% end %>
+  </div>
+</div>

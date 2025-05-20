@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_20_002403) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_20_184754) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -46,7 +46,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_20_002403) do
     t.bigint "folder_id"
     t.string "name", null: false
     t.string "description"
-    t.integer "order", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["folder_id"], name: "index_archives_on_folder_id"
@@ -56,7 +55,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_20_002403) do
     t.bigint "parent_folder_id"
     t.string "name", null: false
     t.string "description"
-    t.integer "order", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_folder_id"], name: "index_folders_on_parent_folder_id"

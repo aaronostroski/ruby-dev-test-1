@@ -1,0 +1,10 @@
+pt-BR:
+  site:
+    home:
+      index:
+        heading: Meus arquivos
+        nome: Nome
+        descrição: Descrição
+        updated_at: Ultima modificação em
+        size: Tamanho
+

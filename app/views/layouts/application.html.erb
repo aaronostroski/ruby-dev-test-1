@@ -23,6 +23,7 @@
   </head>
 
   <body>
+    <%= render partial: "components/flash_messages" %>
     <%= content_for?(:content) ? yield(:content) : yield %>
   </body>
 </html>

@@ -1,0 +1,6 @@
+pt-BR:
+  views:
+    components:
+      new_folder:
+        description: Crie uma nova pasta para seus arquivos
+        button: Criar nova pasta

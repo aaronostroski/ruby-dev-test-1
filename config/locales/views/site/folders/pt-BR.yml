@@ -1,0 +1,12 @@
+pt-BR:
+  site:
+    folders:
+      new:
+        heading: Pasta
+        heading_register: Criar
+      edit:
+        heading: "Pasta #%{id}"
+      form:
+        back: :views.defaults.back
+        save: :views.defaults.save
+        waiting: :views.defaults.waiting

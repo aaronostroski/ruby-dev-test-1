@@ -1,0 +1,12 @@
+pt-BR:
+  site:
+    archives:
+      new:
+        heading: Arquivos
+        heading_register: Criar
+      edit:
+        heading: "Arquivo #%{id}"
+      form:
+        back: :views.defaults.back
+        save: :views.defaults.save
+        waiting: :views.defaults.waiting

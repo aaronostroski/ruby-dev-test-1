@@ -1,0 +1,16 @@
+<%= form_with model: [:site, @folder] do |f| %>
+  <div class="grid grid-cols-2 gap-6 mt-10">
+    <div class="col-span-2">
+      <label class="block text-sm font-medium text-gray-700 required"><%= Folder.human_attribute_name(:name) %></label>
+      <%= f.text_field :name, required: true, class: "mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    </div>
+    <div class="col-span-2">
+      <label class="block text-sm font-medium text-gray-700"><%= Folder.human_attribute_name(:description) %></label>
+      <%= f.text_area :description, rows: 3, class: "mt-1 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" %>
+    </div>
+  </div>
+  <div class="py-3 bg-gray-50 grid grid-cols-2 gap-x-4">
+    <%= link_to(t('.back'), root_path, class: 'inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 text-center') %>
+    <%= f.submit(t('.save'), class: 'inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-500 hover:opacity-80 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2', data: { disable_with: t('.waiting') }) %>
+  </div>
+<% end %>

@@ -5,8 +5,9 @@ pt-BR:
         create_new_folder:
           attributes:
             base:
-              parent_folder_not_found: "Pasta não encontrada"
-        create_new_archive:
+              parent_folder_not_found: Pasta não encontrada
+        create_new_archives:
           attributes:
             base:
-              folder_not_found: "Pasta não encontrada"
+              folder_not_found: Pasta não encontrada
+              files_not_found: Arquivos não encontrados

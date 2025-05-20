@@ -11,8 +11,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "site/home#index"
+  get "home" => "site/home#index", as: :home
 
   namespace :site do
-    get "home/index"
+    resources :folders, except: [:index]
+    resources :archives, except: [:index]
   end
 end

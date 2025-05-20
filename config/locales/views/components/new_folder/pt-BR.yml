@@ -1,0 +1,6 @@
+pt-BR:
+  views:
+    components:
+      new_archives:
+        description: Adicione arquivos a suas pastas
+        button: Adicionar arquivos

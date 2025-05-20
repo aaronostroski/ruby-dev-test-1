@@ -1,9 +1,9 @@
 class CreateNewFolder < ApplicationAction
-  attr_accessor :name, :description, :parent_folder_id, :order
+  attr_accessor :name, :description, :parent_folder_id
   
   validate :folder_should_be_valid
   validate :parent_folder_should_exist, if: -> { parent_folder_id.present? }
-  
+
   def run
     folder.save!
   end
@@ -16,15 +16,14 @@ class CreateNewFolder < ApplicationAction
     @folder ||= Folder.new(
       name:,
       description:,
-      parent_folder:,
-      order:,
+      parent_folder:
     )
   end
 
   private
 
   def folder_should_be_valid
-    errors.add(:base, folder.errors.full_messages.join(', ')) unless folder.valid?
+    errors.add(:base, folder.errors) unless folder.valid?
   end 
 
   def parent_folder_should_exist

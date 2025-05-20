@@ -4,21 +4,33 @@ class Archive < ApplicationRecord
   has_one_attached :file
 
   validates :name, :file, presence: true
-  validates :order, numericality: { greater_than: 0 }, uniqueness: { scope: [:folder_id] }
 
   before_validation :set_name, if: -> { name.blank? }
 
-  def size
-    file.blob.byte_size
+  def human_size
+    units = %w[B KB MB GB TB]
+    size = file.blob.byte_size.to_f
+    index = 0
+
+    while size >= 1024 && index < units.length - 1
+      size /= 1024
+      index += 1
+    end
+
+    "#{format('%.2f', size)} #{units[index]}"
   end
 
   def type
-    file.blob.content_type
+    file&.blob&.content_type
+  end
+
+  def filename
+    file&.blob&.filename&.to_s
   end
 
   private
 
   def set_name
-    self.name = file.filename.to_s
+    self.name = filename
   end
 end

@@ -1,7 +1,10 @@
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require('flowbite/plugin')
+  ],
   content: [
     "./app/views/**/*.html.erb",
     "./app/helpers/**/*.rb",
@@ -9,11 +12,7 @@ module.exports = {
     "./app/javascript/**/*.js",
     "./config/locales/**/*.yml",
   ],
-
   theme: {
-    container: {
-      padding: "1rem",
-    },
     colors: {
       ...colors,
       primary: {
