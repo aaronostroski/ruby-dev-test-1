@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    attributes:
+      folder:
+        parent_folder_id: Pasta
+        name: Nome
+        description: Descrição
+        order: Ordem
