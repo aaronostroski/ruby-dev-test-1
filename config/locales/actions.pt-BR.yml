@@ -6,3 +6,7 @@ pt-BR:
           attributes:
             base:
               parent_folder_not_found: "Pasta não encontrada"
+        create_new_archive:
+          attributes:
+            base:
+              folder_not_found: "Pasta não encontrada"

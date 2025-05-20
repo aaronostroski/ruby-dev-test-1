@@ -43,7 +43,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_20_002403) do
   end
 
   create_table "archives", force: :cascade do |t|
-    t.bigint "folder_id", null: false
+    t.bigint "folder_id"
     t.string "name", null: false
     t.string "description"
     t.integer "order", null: false

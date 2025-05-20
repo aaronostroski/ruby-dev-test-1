@@ -1,5 +1,5 @@
 class Archive < ApplicationRecord
-  belongs_to :folder, optional: false
+  belongs_to :folder, optional: true
 
   has_one_attached :file
 
