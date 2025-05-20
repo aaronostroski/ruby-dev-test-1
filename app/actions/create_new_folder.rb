@@ -23,7 +23,7 @@ class CreateNewFolder < ApplicationAction
   private
 
   def folder_should_be_valid
-    errors.add(:base, folder.errors) unless folder.valid?
+    errors.merge!(folder.errors) unless folder.valid?
   end 
 
   def parent_folder_should_exist

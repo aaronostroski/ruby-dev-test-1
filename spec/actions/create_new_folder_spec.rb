@@ -41,8 +41,8 @@ RSpec.describe CreateNewFolder do
     it 'If folder is not valid, it should return an error' do
       action = described_class.new(name: '', description: 'Description')
 
-      expect(action).not_to be_valid      
-      expect(action.errors.full_messages).to include('Nome não pode ficar em branco')
+      expect(action).not_to be_valid            
+      expect(action.errors.full_messages).to include('Name não pode ficar em branco')
     end
   end
 end 

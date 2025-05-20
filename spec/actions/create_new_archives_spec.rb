@@ -40,8 +40,8 @@ RSpec.describe CreateNewArchives do
 
     it 'User can pass multiples files' do
       files = [
-        Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'test1.pdf'), 'application/pdf'),
-        Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'test2.pdf'), 'application/pdf')
+        Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'test.pdf'), 'application/pdf'),
+        Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'test.pdf'), 'application/pdf')
       ]
       action = described_class.new(description: 'Description', files:)
 

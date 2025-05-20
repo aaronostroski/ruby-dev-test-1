@@ -12,7 +12,7 @@ class Site::FoldersController < SiteController
       redirect_to home_path(folder_id: action.folder.id)
     else
       flash[:error] = action.errors.full_messages.join(', ')
-      redirect_to new_folder_path
+      redirect_to new_site_folder_path, status: :unprocessable_entity
     end
   end
 

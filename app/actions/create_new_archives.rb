@@ -13,7 +13,7 @@ class CreateNewArchives < ApplicationAction
   end
 
   def archives    
-    @archives ||= files.reject(&:blank?)&.map do |file|
+    @archives ||= files&.reject(&:blank?)&.map do |file|
       Archive.new(
         folder:,
         description:,
@@ -28,8 +28,8 @@ class CreateNewArchives < ApplicationAction
     errors.add(:base, :files_not_found) unless files&.reject(&:blank?).present?
   end 
 
-  def archives_should_be_valid    
-    errors.add(:base, archives&.map(&:errors)&.flatten&.map(&:full_messages)) unless archives&.all?(&:valid?)
+  def archives_should_be_valid            
+    errors.merge!(archives&.map(&:errors)) if archives.present? && !archives.all?(&:valid?)
   end 
 
   def folder_should_exist
