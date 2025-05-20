@@ -1,5 +1,5 @@
 <div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 flex flex-col">
-  <%= link_to(new_site_archive_path, data: { turbo_frame: 'modal' }, class: "grow bg-gray-100 h-52 w-full flex items-center justify-center rounded-t-lg") do %>
+  <%= link_to(home_path(filters: { folder_id: folder.id }), class: "grow bg-gray-100 h-52 w-full flex items-center justify-center rounded-t-lg") do %>
     <i class="fa-solid fa-folder-closed h-36"></i>
   <% end %>
   <div class="p-5 flex flex-col justify-vetween">
@@ -9,7 +9,7 @@
     <p class="mb-3 mt-1 font-normal text-gray-700 dark:text-gray-400 grow">
       <%= folder.description.truncate(50) %>
     </p>
-    <%= link_to(home_path(folder_id: folder.id), class: "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-500 rounded-lg transition-all hover:opacity-75 focus:ring-4 focus:outline-none") do %>
+    <%= link_to(home_path(filters: { folder_id: folder.id }), class: "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-500 rounded-lg transition-all hover:opacity-75 focus:ring-4 focus:outline-none") do %>
       <%= t('views.components.item.button') %>
       <i class="ml-2 fa-solid fa-arrow-right"></i>
     <% end %>
