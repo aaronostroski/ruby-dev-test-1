@@ -1,6 +1,5 @@
 class CreateNewArchives < ApplicationAction
   attr_accessor :folder_id, :description, :files
-  
   validate :files_should_be_present, :archives_should_be_valid
   validate :folder_should_exist, if: -> { folder_id.present? }
 

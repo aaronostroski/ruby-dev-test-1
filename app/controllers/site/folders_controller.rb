@@ -15,7 +15,7 @@ class Site::FoldersController < SiteController
       flash[:success] = t('views.defaults.sucessfully_created')
       redirect_to home_path(filters: { folder_id: action&.parent_folder&.id })
     else
-      flash[:error] = action.errors.full_messages.join(', ')
+      flash[:error] = action.errors.full_messages.join(", ")
       redirect_to new_site_folder_path, status: :unprocessable_entity
     end
   end
@@ -29,7 +29,7 @@ class Site::FoldersController < SiteController
       flash[:success] = t('views.defaults.sucessfully_updated')
       redirect_to home_path(filters: { folder_id: action&.parent_folder&.id })
     else
-      flash[:error] = action.errors.full_messages.join(', ')
+      flash[:error] = action.errors.full_messages.join(", ")
       redirect_to edit_site_folder_path, status: :unprocessable_entity
     end
   end

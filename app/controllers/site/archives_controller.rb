@@ -13,7 +13,7 @@ class Site::ArchivesController < SiteController
       flash[:success] = t('views.defaults.sucessfully_created')
       redirect_to home_path(filters: { folder_id: action.folder_id })
     else        
-      flash[:error] = action.errors.full_messages.join(', ')      
+      flash[:error] = action.errors.full_messages.join(", ")      
       redirect_to new_site_archive_path, status: :unprocessable_entity
     end
   end
@@ -27,7 +27,7 @@ class Site::ArchivesController < SiteController
       flash[:success] = t('views.defaults.sucessfully_updated')
       redirect_to home_path(filters: { folder_id: action&.folder&.id })
     else
-      flash[:error] = action.errors.full_messages.join(', ')    
+      flash[:error] = action.errors.full_messages.join(", ")    
       
       binding.pry
         
