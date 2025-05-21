@@ -21,7 +21,7 @@ RSpec.describe UpdateArchive do
       expect(updated_archive.id).to eql(archive.id)
       expect(updated_archive.name).to eq 'New name'
       expect(updated_archive.description).to eq 'Description'
-      expect(updated_archive.type).to eq 'pdf'
+      expect(updated_archive.content_type).to eq 'pdf'
       expect(updated_archive.file).to be_attached
       expect(updated_archive.size).to be_present
       expect(updated_archive.folder).to be_nil
@@ -45,7 +45,7 @@ RSpec.describe UpdateArchive do
       expect(updated_archive.id).to eql(archive.id)
       expect(updated_archive.name).to_not eq archive.name
       expect(updated_archive.description).to eq 'Description'
-      expect(updated_archive.type).to eq 'pdf'
+      expect(updated_archive.content_type).to eq 'pdf'
       expect(updated_archive.file).to be_attached
       expect(updated_archive.size).to be_present
       expect(updated_archive.folder).to eq another_folder

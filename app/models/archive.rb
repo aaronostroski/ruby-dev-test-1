@@ -6,37 +6,30 @@ class Archive < ApplicationRecord
   validates :name, :file, presence: true
 
   before_validation :set_name, if: -> { name.blank? }
-  before_save :set_size, if: -> { attachment_changes.any? }
-
-  def type
-    type = file&.blob&.content_type
-    type = type.gsub('application/', '') if type&.match?(/application\//)
-    type = type.gsub('image/', '') if type&.match?(/image\//)
-    type
-  end
+  before_save :set_size, :set_content_type, if: -> { attachment_changes.any? }
 
   def filename
     file&.blob&.filename&.to_s
   end
 
   def pdf?    
-    type.match?('pdf')
+    content_type.match?('pdf')
   end
 
   def image?
-    file&.blob&.image?
+    content_type.match?('image')
   end
 
   def video?
-    file&.blob&.video?
+    content_type.match?('video')
   end
 
   def csv_or_xlsx?
-    type.match?('csv') || type.match?('sheet')
+    content_type.match?('csv') || content_type.match?('sheet')
   end
 
   def zip?
-    type.match?('zip')
+    content_type.match?('zip')
   end
 
   private
@@ -47,5 +40,11 @@ class Archive < ApplicationRecord
 
   def set_size
     self.size = file.blob.byte_size
+  end
+
+  def set_content_type
+    content_type = file&.blob&.content_type
+    content_type = content_type.gsub('application/', '') if content_type&.match?(/application\//)
+    self.content_type = content_type
   end
 end

@@ -8,17 +8,17 @@ class Site::HomeController < SiteController
   private
 
   def set_archives
-    archives = Archive.all
-    archives = archives.where(folder_id: @filters.folder_id) unless @filters.folder_id.blank?
-    archives = archives.where(folder_id: nil) if @filters.folder_id&.blank?
+    archives = Archive.all    
+    archives = archives.where(folder_id: @filters.folder_id) if @filters.folder_id.present?
+    archives = archives.where(folder_id: nil) unless @filters.folder_id&.present?
 
     @archives = archives.order(:name)
   end
 
   def set_folders
     folders = Folder.all
-    folders = folders.where(parent_folder_id: @filters.folder_id) unless @filters.folder_id.blank?
-    folders = folders.where(parent_folder_id: nil) if @filters.folder_id&.blank?
+    folders = folders.where(parent_folder_id: @filters.folder_id) if @filters.folder_id.present?
+    folders = folders.where(parent_folder_id: nil) unless @filters.folder_id&.present?
 
     @folders = folders.order(:name)
   end

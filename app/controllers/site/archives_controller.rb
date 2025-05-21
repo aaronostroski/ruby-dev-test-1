@@ -27,23 +27,25 @@ class Site::ArchivesController < SiteController
       flash[:success] = t('views.defaults.sucessfully_updated')
       redirect_to home_path(filters: { folder_id: action&.folder&.id })
     else
-      flash[:error] = action.errors.full_messages.join(', ')
+      flash[:error] = action.errors.full_messages.join(', ')    
+      
+      binding.pry
+        
       redirect_to edit_site_archive_path, status: :unprocessable_entity
     end
   end
 
-
   def destroy
     @archive.destroy
     flash[:success] = t('views.defaults.sucessfully_deleted')
-    redirect_to home_path(filters: { folder_id: @archive&.id })
+    redirect_to home_path(filters: { folder_id: @archive&.folder_id })
   end
 
   def download
     if @archive.file.attached?
       send_data @archive.file.download,
                 filename: @archive.filename,
-                type: @archive.type,
+                type: @archive.content_type,
                 disposition: 'attachment'
     else
       flash[:error] = t('views.defaults.resource_not_found')

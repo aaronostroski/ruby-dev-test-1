@@ -16,7 +16,7 @@ RSpec.describe CreateNewArchives do
       expect(archive).to be_persisted
       expect(archive.name).to eq archive.filename
       expect(archive.description).to eq 'Description'
-      expect(archive.type).to eq 'pdf'
+      expect(archive.content_type).to eq 'pdf'
       expect(archive.file).to be_attached
       expect(archive.size).to be_present
       expect(archive.folder).to be_nil
@@ -34,7 +34,7 @@ RSpec.describe CreateNewArchives do
       expect(archive).to be_persisted
       expect(archive.name).to eq archive.filename
       expect(archive.description).to eq 'Description'
-      expect(archive.type).to eq 'pdf'
+      expect(archive.content_type).to eq 'pdf'
       expect(archive.file).to be_attached
       expect(archive.size).to be_present
       expect(archive.folder).to eq folder
@@ -56,7 +56,7 @@ RSpec.describe CreateNewArchives do
         expect(archive).to be_persisted
         expect(archive.name).to eq archive.filename
         expect(archive.description).to eq 'Description'
-        expect(archive.type).to eq 'pdf'
+        expect(archive.content_type).to eq 'pdf'
         expect(archive.file).to be_attached
         expect(archive.size).to be_present
         expect(archive.folder).to be_nil
