@@ -1,16 +1,28 @@
-# Dockerfile.dev
 FROM ruby:3.2.4
 
 WORKDIR /myapp
 
-RUN apt-get update -qq && apt-get install -y \
-  build-essential libpq-dev nodejs yarn \
+# Install Node.js and Yarn from NodeSource (correct version)
+RUN apt-get update -qq && apt-get install -y curl gnupg2 build-essential libpq-dev \
+  && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+  && apt-get install -y nodejs \
+  && npm install -g yarn \
   && rm -rf /var/lib/apt/lists/*
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
+# Add JS build dependencies
+RUN yarn add --dev esbuild tailwindcss
+RUN yarn add esbuild-wasm
+
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
+
 COPY . .
+
+RUN yarn build --watch
+RUN yarn build:css --watch
 
 EXPOSE 3000
 
@@ -18,4 +30,4 @@ ENV RAILS_ENV=development
 ENV RAILS_SERVE_STATIC_FILES=true
 ENV RAILS_LOG_TO_STDOUT=true
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["sh", "-c", "rm -f tmp/pids/server.pid && rails server -b 0.0.0.0"]
