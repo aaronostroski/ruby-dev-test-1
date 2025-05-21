@@ -1,0 +1,31 @@
+<div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 flex flex-col">
+  <%= link_to(download_site_archive_path(archive.id), class: "grow bg-gray-100 h-52 w-full flex items-center justify-center rounded-t-lg") do %>
+    <%= render('components/archives/archive_badge', archive:)%>
+  <% end %>
+  <div class="p-5 flex flex-col justify-between grow">
+    <p class="text-md font-normal text-gray-900 font-bold dark:text-gray-400">
+      <%= archive.name.truncate(25) %>
+    </p>
+    <p class="text-md font-normal text-gray-500 dark:text-gray-400">
+      <p class="text-md font-normal text-gray-500 dark:text-gray-400">
+        <%= t('views.components.archive_badge.type', type: archive.type.truncate(16)) %>
+      </p>
+    </p>
+    <p class="text-md font-normal text-gray-500 dark:text-gray-400">
+      <p class="text-md font-normal text-gray-500 dark:text-gray-400">
+        <%= t('views.components.archive_badge.size', size: archive.human_size) %>
+      </p>
+    </p>
+    <div class="flex items-center gap-x-2 mt-4">
+      <%= link_to(download_site_archive_path(archive.id), title: "Download") do %>
+        <i class="fa-solid fa-download text-blue-500"></i>
+      <% end %>
+      <%= link_to(download_site_archive_path(archive.id), title: "Editar") do %>
+        <i class="fa-solid fa-edit text-primary-500"></i>
+      <% end %>
+      <%= link_to(download_site_archive_path(archive.id), title: "Apagar") do %>
+        <i class="fa-solid fa-trash text-red-500"></i>
+      <% end %>
+    </div>
+  </div>
+</div>

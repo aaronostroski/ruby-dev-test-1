@@ -21,11 +21,34 @@ class Archive < ApplicationRecord
   end
 
   def type
-    file&.blob&.content_type
+    type = file&.blob&.content_type
+    type = type.gsub('application/', '') if type&.match?(/application\//)
+    type = type.gsub('image/', '') if type&.match?(/image\//)
+    type
   end
 
   def filename
     file&.blob&.filename&.to_s
+  end
+
+  def pdf?    
+    type.match?('pdf')
+  end
+
+  def image?
+    file&.blob&.image?
+  end
+
+  def video?
+    file&.blob&.video?
+  end
+
+  def csv_or_xlsx?
+    type.match?('csv') || type.match?('sheet')
+  end
+
+  def zip?
+    type.match?('zip')
   end
 
   private

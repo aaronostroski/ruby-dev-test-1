@@ -16,7 +16,6 @@ class Folder < ApplicationRecord
     end
 
     full_path = full_path.reverse
-    full_path.pop
     full_path || []
   end
 end

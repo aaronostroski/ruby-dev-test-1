@@ -1,15 +1,19 @@
+require 'ostruct'
+
 class Site::FoldersController < SiteController
+  before_action :set_filters, only: [:new]
+  
   def new
     @folder = Folder.new
     @folder.archives.build
   end
 
-  def create    
+  def create        
     action = CreateNewFolder.new(form_params.to_h)
     
     if action.save
       flash[:success] = t('views.defaults.sucessfully_created')
-      redirect_to home_path(folder_id: action.folder.id)
+      redirect_to home_path(filters: { folder_id: action&.parent_folder&.id })
     else
       flash[:error] = action.errors.full_messages.join(', ')
       redirect_to new_site_folder_path, status: :unprocessable_entity
@@ -24,6 +28,10 @@ class Site::FoldersController < SiteController
       :description, 
       :parent_folder_id
     )
+  end
+
+  def set_filters
+    @filters = OpenStruct.new(params[:filters])
   end
 end
   

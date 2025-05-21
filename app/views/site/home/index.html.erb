@@ -1,13 +1,22 @@
 <div class="flex items-center">
-  <i class="fa-solid fa-file w-auto h-6 mr-2"></i>
-  <h1 class="text-2xl font-semibold text-gray-900">
-    <%= t('.heading') %>
-  </h1>
+  <i class="fa-solid fa-house w-auto h-6 mr-2 text-gray-900"></i>
+  <%= link_to(t('.heading') , home_path, class: "text-2xl font-semibold text-gray-900 transition-all hover:opacity-80") %>
+  <% if @current_folder.present? %>
+    <% @current_folder.path.each do |folder| %>
+      <%= link_to(home_path(filters: { folder_id: folder.id }), class: "flex items-center text-2xl font-semibold text-gray-900 transition-all hover:opacity-60") do %>
+        <i class="fa-solid fa-chevron-right mx-2 h-4"></i>
+        <%= folder.name %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
 <div class="mt-4 grid grid-cols-6 gap-6"> 
   <%= render('components/folders/new_folder') %>
   <%= render('components/archives/new_archives') %>
   <% @folders.each do |folder| %>
     <%= render('components/folders/item', folder:) %>
+  <% end %>
+  <% @archives.each do |archive| %>
+    <%= render('components/archives/item', archive:) %>
   <% end %>
 </div>

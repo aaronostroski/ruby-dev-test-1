@@ -24,5 +24,11 @@ FactoryBot.define do
         Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.csv'), 'text/csv')
       end
     end
+
+    trait :video do
+      file do
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.mp4'), 'video/mp4')
+      end
+    end
   end
 end

@@ -1,5 +1,6 @@
 <%= form_with model: [:site, @archive] do |f| %>
   <div class="grid grid-cols-2 gap-6 mt-10">
+    <%= f.hidden_field :folder_id, value: @filters.folder_id || @archive.folder_id %>
     <% if @archive.persisted? %>
     <div class="col-span-2">
       <label class="block text-sm font-medium text-gray-700 required"><%= Archive.human_attribute_name(:name) %></label>

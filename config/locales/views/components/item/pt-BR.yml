@@ -1,0 +1,10 @@
+pt-BR:
+  views:
+    components:
+      folders:
+        item:
+          button: Acessar pasta
+      archives:
+        item:
+          description: Adicione arquivos a suas pastas
+          button: Adicionar arquivos

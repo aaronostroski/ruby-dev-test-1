@@ -2,7 +2,7 @@ pt-BR:
   site:
     home:
       index:
-        heading: Meus arquivos
+        heading: Home
         nome: Nome
         descrição: Descrição
         updated_at: Ultima modificação em

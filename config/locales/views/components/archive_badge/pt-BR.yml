@@ -1,0 +1,6 @@
+pt-BR:
+  views:
+    components:
+      archive_badge:
+        type: "Tipo: %{type}"
+        size: "Tamanho: %{size}"

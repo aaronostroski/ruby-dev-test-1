@@ -14,7 +14,11 @@ Rails.application.routes.draw do
   get "home" => "site/home#index", as: :home
 
   namespace :site do
-    resources :folders, except: [:index]
-    resources :archives, except: [:index]
+    resources :folders, except: [:index] 
+    resources :archives, except: [:index] do
+      member do
+        get :download
+      end
+    end
   end
 end
