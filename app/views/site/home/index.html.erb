@@ -1,21 +1,31 @@
-<div class="flex items-center">
+<div class="flex items-center gap-x-2 mt-4">
   <i class="fa-solid fa-house w-auto h-6 mr-2 text-gray-900"></i>
-  <%= link_to(t('.heading') , home_path, class: "text-2xl font-semibold text-gray-900 transition-all hover:opacity-80") %>
+  <%= link_to(t('.heading'), home_path, class: "text-2xl font-semibold text-gray-900 transition-all hover:opacity-80") %>
   <% if @current_folder.present? %>
     <% @current_folder.path.each do |folder| %>
       <%= link_to(home_path(filters: { folder_id: folder.id }), class: "flex items-center text-2xl font-semibold text-gray-900 transition-all hover:opacity-60") do %>
-        <i class="fa-solid fa-chevron-right mx-2 h-4"></i>
+        <i class="fa-solid fa-chevron-right mx-4 h-6"></i>
         <%= folder.name %>
       <% end %>
     <% end %>
   <% end %>
 </div>
-<div class="mt-4 grid grid-cols-6 gap-6"> 
+<div class="flex items-center gap-x-2 mt-4">
+  <i class="fa-solid fa-folder-closed w-auto h-6 mr-2 text-gray-900"></i>
+  <h2 class="text-2xl font-semibold text-gray-900 transition-all hover:opacity-80"><%= t('.heading_folders') %></h2>
+</div>
+<div class="mt-4 grid grid-cols-6 gap-6">
   <%= render('components/folders/new_folder') %>
-  <%= render('components/archives/new_archives') %>
   <% @folders.each do |folder| %>
     <%= render('components/folders/item', folder:) %>
   <% end %>
+</div>
+<div class="flex items-center gap-x-2 mt-4">
+  <i class="fa-solid fa-file w-auto h-6 mr-2 text-gray-900"></i>
+  <h2 class="text-2xl font-semibold text-gray-900 transition-all hover:opacity-80"><%= t('.heading_archives') %></h2>
+</div>
+<div class="mt-4 grid grid-cols-6 gap-6">
+  <%= render('components/archives/new_archives') %>
   <% @archives.each do |archive| %>
     <%= render('components/archives/item', archive:) %>
   <% end %>
