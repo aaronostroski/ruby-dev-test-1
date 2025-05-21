@@ -1,9 +1,9 @@
 <nav class="flex-1 px-4 pb-4 space-y-2">
-  <%= link_to(new_site_folder_path(filters: { parent_folder_id: @filters.folder_id }), class: "inline-flex justify-center items-center text-sm font-medium text-center text-white rounded-lg transition-all hover:opacity-75 focus:ring-4 focus:outline-none") do %>
+  <%= link_to(new_site_folder_path(filters: { parent_folder_id: @filters&.folder_id }), class: "inline-flex justify-center items-center text-sm font-medium text-center text-white rounded-lg transition-all hover:opacity-75 focus:ring-4 focus:outline-none") do %>
     <i class="fa-solid fa-folder-plus mr-2"></i>
     <%= t('views.components.new_folder.button') %>
   <% end %>
-  <%= link_to(new_site_archive_path(filters: { folder_id: @filters.folder_id }), class: "inline-flex justify-center items-center text-sm font-medium text-center text-white rounded-lg transition-all hover:opacity-75 focus:ring-4 focus:outline-none") do %>
+  <%= link_to(new_site_archive_path(filters: { folder_id: @filters&.folder_id }), class: "inline-flex justify-center items-center text-sm font-medium text-center text-white rounded-lg transition-all hover:opacity-75 focus:ring-4 focus:outline-none") do %>
     <i class="fa-solid fa-file-export mr-2"></i>
     <%= t('views.components.new_archives.button') %>
   <% end %>

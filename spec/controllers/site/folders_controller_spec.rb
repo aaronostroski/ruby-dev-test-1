@@ -21,6 +21,26 @@ RSpec.describe Site::FoldersController, type: :controller do
       expect(folder.description).to eql(params[:folder][:description])
     end
 
+    it 'Updates folder'do
+      folder = FactoryBot.create(:folder)
+      params = {
+        id: folder.id,
+        folder: {
+          name: FFaker::Lorem.word,
+          description: FFaker::Lorem.sentence
+        }
+      }
+            
+      patch :update, params: params
+
+      expect(response).to have_http_status(302)
+      folder.reload
+
+      expect(folder).to be_present      
+      expect(folder.name).to eql(params[:folder][:name])
+      expect(folder.description).to eql(params[:folder][:description])
+    end
+
     it 'Destroy folder' do
       folder = FactoryBot.create(:folder)
       params = {

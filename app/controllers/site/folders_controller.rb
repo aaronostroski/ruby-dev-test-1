@@ -1,7 +1,7 @@
 require 'ostruct'
 
 class Site::FoldersController < SiteController
-  before_action :set_folder, only: [:destroy]
+  before_action :set_folder, only: [:edit, :update, :destroy]
   before_action :set_filters, only: [:new]
   
   def new
@@ -17,6 +17,20 @@ class Site::FoldersController < SiteController
     else
       flash[:error] = action.errors.full_messages.join(', ')
       redirect_to new_site_folder_path, status: :unprocessable_entity
+    end
+  end
+
+  def edit; end
+
+  def update
+    action = UpdateFolder.new(form_params.merge(folder_id: @folder.id).to_h)
+    
+    if action.save
+      flash[:success] = t('views.defaults.sucessfully_created')
+      redirect_to home_path(filters: { folder_id: action&.parent_folder&.id })
+    else
+      flash[:error] = action.errors.full_messages.join(', ')
+      redirect_to edit_site_folder_path, status: :unprocessable_entity
     end
   end
 

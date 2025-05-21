@@ -6,6 +6,10 @@ pt-BR:
           attributes:
             base:
               parent_folder_not_found: Pasta não encontrada
+        update_folder:
+          attributes:
+            base:
+              parent_folder_not_found: Pasta não encontrada
         create_new_archives:
           attributes:
             base:
