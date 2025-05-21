@@ -9,14 +9,16 @@ class Site::HomeController < SiteController
 
   def set_archives
     archives = Archive.all
-    archives = archives.where(folder_id: @filters.folder_id || nil)
+    archives = archives.where(folder_id: @filters.folder_id) unless @filters.folder_id.blank?
+    archives = archives.where(folder_id: nil) if @filters.folder_id&.blank?
 
     @archives = archives.order(:name)
   end
 
   def set_folders
     folders = Folder.all
-    folders = folders.where(parent_folder_id: @filters.folder_id || nil)
+    folders = folders.where(parent_folder_id: @filters.folder_id) unless @filters.folder_id.blank?
+    folders = folders.where(parent_folder_id: nil) if @filters.folder_id&.blank?
 
     @folders = folders.order(:name)
   end

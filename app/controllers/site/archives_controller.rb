@@ -1,6 +1,6 @@
 class Site::ArchivesController < SiteController
+  before_action :set_archive, only: [:destroy, :download]
   before_action :set_filters, only: [:new]
-  before_action :set_archive, only: [:download]
 
   def new
     @archive = Archive.new
@@ -16,6 +16,12 @@ class Site::ArchivesController < SiteController
       flash[:error] = action.errors.full_messages.join(', ')      
       redirect_to new_site_archive_path, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @archive.destroy
+    flash[:success] = t('views.defaults.sucessfully_deleted')
+    redirect_to home_path(filters: { folder_id: @archive&.id })
   end
 
   def download

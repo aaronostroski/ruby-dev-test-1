@@ -1,11 +1,11 @@
 require 'ostruct'
 
 class Site::FoldersController < SiteController
+  before_action :set_folder, only: [:destroy]
   before_action :set_filters, only: [:new]
   
   def new
     @folder = Folder.new
-    @folder.archives.build
   end
 
   def create        
@@ -20,6 +20,12 @@ class Site::FoldersController < SiteController
     end
   end
 
+  def destroy
+    @folder.destroy
+    flash[:success] = t('views.defaults.sucessfully_deleted')
+    redirect_to home_path(filters: { folder_id: @folder&.id })
+  end
+
   private
 
   def form_params
@@ -32,6 +38,10 @@ class Site::FoldersController < SiteController
 
   def set_filters
     @filters = OpenStruct.new(params[:filters])
+  end
+
+  def set_folder
+    @folder = Folder.find(params[:id])
   end
 end
   

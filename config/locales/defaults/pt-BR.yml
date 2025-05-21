@@ -10,3 +10,4 @@ pt-BR:
       destroy: Apagar
       delete_confirmation: Deseja apagar este registro?
       show: Visualizar
+      sucessfully_deleted: Deletado com sucesso!

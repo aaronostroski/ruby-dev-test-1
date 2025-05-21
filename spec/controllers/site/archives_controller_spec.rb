@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Site::ArchivesController, type: :controller do
-  describe 'Consumes Archives API' do
+  describe 'Happy path' do
     it 'Create new archives'do
       params = {
         archive: {
@@ -23,6 +23,20 @@ RSpec.describe Site::ArchivesController, type: :controller do
       expect(archive.file).to be_attached
     end
 
+    it 'Destroy Archive' do
+      archive = FactoryBot.create(:archive)
+      params = {
+        id: archive.id 
+      }
+
+      delete :destroy, params: params
+
+      expect(response).to have_http_status(302)      
+      expect(Archive.count).to be 0
+    end
+  end
+
+  describe 'Validations' do
     it 'Create archive but with invalid params' do
       params = {
         archive: {

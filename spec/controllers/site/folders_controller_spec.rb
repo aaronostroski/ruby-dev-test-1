@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Site::FoldersController, type: :controller do
-  describe 'Consumes Folders API' do
+  describe 'Happy Path' do
     it 'Create new folder'do
       params = {
         folder: {
@@ -21,6 +21,20 @@ RSpec.describe Site::FoldersController, type: :controller do
       expect(folder.description).to eql(params[:folder][:description])
     end
 
+    it 'Destroy folder' do
+      folder = FactoryBot.create(:folder)
+      params = {
+        id: folder.id 
+      }
+
+      delete :destroy, params: params
+
+      expect(response).to have_http_status(302)      
+      expect(Folder.count).to be 0
+    end
+  end
+
+  describe 'Validations' do
     it 'Create folder but with invalid params' do
       params = {
         folder: {
