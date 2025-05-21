@@ -56,15 +56,15 @@ RSpec.describe UpdateArchive do
     it 'If folder is not found, it should return an error' do
       action = described_class.new(archive_id: archive.id, description: 'Description', folder_id: 9999, file:)
 
-      expect(action).not_to be_valid      
+      expect(action).not_to be_valid
       expect(action.errors.full_messages).to include('Pasta não encontrada')
     end
 
     it 'When passed files is nil' do
       action = described_class.new(archive_id: archive.id, description: 'Description')
-      
-      expect(action).not_to be_valid      
+
+      expect(action).not_to be_valid
       expect(action.errors.full_messages).to include('File não pode ficar em branco')
     end
   end
-end 
+end

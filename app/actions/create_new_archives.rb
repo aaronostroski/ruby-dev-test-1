@@ -4,14 +4,14 @@ class CreateNewArchives < ApplicationAction
   validate :folder_should_exist, if: -> { folder_id.present? }
 
   def run
-    archives.map(&:save!)      
+    archives.map(&:save!)
   end
 
   def folder
     @folder ||= Folder.find_by(id: folder_id)
   end
 
-  def archives    
+  def archives
     @archives ||= files&.reject(&:blank?)&.map do |file|
       Archive.new(
         folder:,
@@ -23,13 +23,13 @@ class CreateNewArchives < ApplicationAction
 
   private
 
-  def files_should_be_present 
+  def files_should_be_present
     errors.add(:base, :files_not_found) unless files&.reject(&:blank?).present?
-  end 
+  end
 
-  def archives_should_be_valid            
+  def archives_should_be_valid
     errors.merge!(archives&.map(&:errors)) if archives.present? && !archives.all?(&:valid?)
-  end 
+  end
 
   def folder_should_exist
     errors.add(:base, :folder_not_found) unless folder.present?

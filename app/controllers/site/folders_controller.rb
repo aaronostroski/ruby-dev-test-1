@@ -1,18 +1,18 @@
-require 'ostruct'
+require "ostruct"
 
 class Site::FoldersController < SiteController
-  before_action :set_folder, only: [:edit, :update, :destroy]
-  before_action :set_filters, only: [:new]
-  
+  before_action :set_folder, only: [ :edit, :update, :destroy ]
+  before_action :set_filters, only: [ :new ]
+
   def new
     @folder = Folder.new
   end
 
-  def create        
+  def create
     action = CreateNewFolder.new(form_params.to_h)
-    
+
     if action.save
-      flash[:success] = t('views.defaults.sucessfully_created')
+      flash[:success] = t("views.defaults.sucessfully_created")
       redirect_to home_path(filters: { folder_id: action&.parent_folder&.id })
     else
       flash[:error] = action.errors.full_messages.join(", ")
@@ -24,9 +24,9 @@ class Site::FoldersController < SiteController
 
   def update
     action = UpdateFolder.new(form_params.merge(folder_id: @folder.id).to_h)
-    
+
     if action.save
-      flash[:success] = t('views.defaults.sucessfully_updated')
+      flash[:success] = t("views.defaults.sucessfully_updated")
       redirect_to home_path(filters: { folder_id: action&.parent_folder&.id })
     else
       flash[:error] = action.errors.full_messages.join(", ")
@@ -36,7 +36,7 @@ class Site::FoldersController < SiteController
 
   def destroy
     @folder.destroy
-    flash[:success] = t('views.defaults.sucessfully_deleted')
+    flash[:success] = t("views.defaults.sucessfully_deleted")
     redirect_to home_path(filters: { folder_id: @folder&.id })
   end
 
@@ -44,8 +44,8 @@ class Site::FoldersController < SiteController
 
   def form_params
     params.require(:folder).permit(
-      :name, 
-      :description, 
+      :name,
+      :description,
       :parent_folder_id
     )
   end
@@ -58,4 +58,3 @@ class Site::FoldersController < SiteController
     @folder = Folder.find(params[:id])
   end
 end
-  

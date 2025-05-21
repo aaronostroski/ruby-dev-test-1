@@ -1,6 +1,6 @@
 class CreateNewFolder < ApplicationAction
   attr_accessor :name, :description, :parent_folder_id
-  
+
   validate :folder_should_be_valid
   validate :parent_folder_should_exist, if: -> { parent_folder_id.present? }
 
@@ -24,7 +24,7 @@ class CreateNewFolder < ApplicationAction
 
   def folder_should_be_valid
     errors.merge!(folder.errors) unless folder.valid?
-  end 
+  end
 
   def parent_folder_should_exist
     errors.add(:base, :parent_folder_not_found) unless parent_folder.present?

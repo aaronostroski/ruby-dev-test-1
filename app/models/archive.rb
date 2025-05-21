@@ -12,24 +12,24 @@ class Archive < ApplicationRecord
     file&.blob&.filename&.to_s
   end
 
-  def pdf?    
-    content_type.match?('pdf')
+  def pdf?
+    content_type.match?("pdf")
   end
 
   def image?
-    content_type.match?('image')
+    content_type.match?("image")
   end
 
   def video?
-    content_type.match?('video')
+    content_type.match?("video")
   end
 
   def csv_or_xlsx?
-    content_type.match?('csv') || content_type.match?('sheet')
+    content_type.match?("csv") || content_type.match?("sheet")
   end
 
   def zip?
-    content_type.match?('zip')
+    content_type.match?("zip")
   end
 
   private
@@ -44,7 +44,7 @@ class Archive < ApplicationRecord
 
   def set_content_type
     content_type = file&.blob&.content_type
-    content_type = content_type.gsub('application/', '') if content_type&.match?(/application\//)
+    content_type = content_type.gsub("application/", "") if content_type&.match?(/application\//)
     self.content_type = content_type
   end
 end

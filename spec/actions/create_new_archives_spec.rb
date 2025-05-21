@@ -68,22 +68,22 @@ RSpec.describe CreateNewArchives do
     it 'If folder is not found, it should return an error' do
       action = described_class.new(description: 'Description', folder_id: 9999, files:)
 
-      expect(action).not_to be_valid      
+      expect(action).not_to be_valid
       expect(action.errors.full_messages).to include('Pasta não encontrada')
     end
 
     it 'When passed files is an empty array' do
       action = described_class.new(description: 'Description', files: [])
-      
-      expect(action).not_to be_valid      
+
+      expect(action).not_to be_valid
       expect(action.errors.full_messages).to include('Arquivos não encontrados')
     end
 
     it 'When passed files is nil' do
       action = described_class.new(description: 'Description')
-      
-      expect(action).not_to be_valid      
+
+      expect(action).not_to be_valid
       expect(action.errors.full_messages).to include('Arquivos não encontrados')
     end
   end
-end 
+end

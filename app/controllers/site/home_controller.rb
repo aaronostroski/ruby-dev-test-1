@@ -1,10 +1,10 @@
-require 'ostruct'
+require "ostruct"
 
 class Site::HomeController < SiteController
   PER_PAGE = 11
-  before_action :set_filters, :set_folders, :set_archives, :set_current_folder, :set_totals, only: [:index]
+  before_action :set_filters, :set_folders, :set_archives, :set_current_folder, :set_totals, only: [ :index ]
 
-  def index; end;
+  def index; end
 
   private
 
@@ -17,7 +17,7 @@ class Site::HomeController < SiteController
   end
 
   def set_archives
-    archives = Archive.all    
+    archives = Archive.all
     archives = archives.where(folder_id: @filters.folder_id) if @filters.folder_id.present?
     archives = archives.where(folder_id: nil) unless @filters.folder_id&.present?
 
@@ -32,4 +32,3 @@ class Site::HomeController < SiteController
     @filters = OpenStruct.new(params[:filters])
   end
 end
-  

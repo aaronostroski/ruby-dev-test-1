@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :archive do
-    folder { FactoryBot.create(:folder)}
+    folder { FactoryBot.create(:folder) }
     name { FFaker::Lorem.word }
     description { FFaker::Lorem.sentence }
     file do

@@ -4,14 +4,14 @@ RSpec.describe Archive, type: :model do
   it 'Factory is valid' do
     expect(FactoryBot.build(:archive)).to be_valid
   end
-  
+
   it 'Archive is a image' do
     archive_image = FactoryBot.create(:archive, :image)
     expect(archive_image.image?).to be true
   end
 
   it 'Archive is a pdf' do
-    archive_pdf = FactoryBot.create(:archive, :pdf)    
+    archive_pdf = FactoryBot.create(:archive, :pdf)
     expect(archive_pdf.pdf?).to be true
   end
 
@@ -28,7 +28,7 @@ RSpec.describe Archive, type: :model do
   it 'Archive is a video' do
     archive_video = FactoryBot.create(:archive, :video)
     expect(archive_video.video?).to be true
-  end    
+  end
 
   it 'Only should set size and type when file changes' do
     archive = FactoryBot.create(:archive, :csv)
