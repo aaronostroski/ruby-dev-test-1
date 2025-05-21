@@ -4,6 +4,8 @@
   <% else %>
     <%= image_tag archive.file.variant(resize_to_limit: [300, 300]), class: "h-52 w-full" %>
   <% end %>
+<% elsif archive.video? %>
+  <%= video_tag url_for(archive.file), controls: true, width: 300 %>
 <% elsif archive.zip? %>
   <i class="fa-solid fa-file-archive text-yellow-500 h-52 w-full"></i>
 <% elsif archive.csv_or_xlsx? %>
