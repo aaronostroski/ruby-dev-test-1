@@ -1,9 +1,9 @@
 require 'ostruct'
 
 class Site::HomeController < SiteController
-  before_action :set_filters, :set_archives, :set_folders, :set_current_folder, only: [:index]
+  before_action :set_filters, :set_archives, :set_folders, :set_current_folder, :set_totals, only: [:index]
 
-  def index; end
+  def index; end;
 
   private
 
@@ -27,6 +27,13 @@ class Site::HomeController < SiteController
 
   def set_filters
     @filters = OpenStruct.new(params[:filters])
+  end
+
+  def set_totals
+    @totals = {
+      folders: Folder.count,
+      archives: Archive.count
+    }
   end
 end
   

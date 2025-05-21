@@ -1,8 +1,16 @@
-<nav class="flex-1 px-2 pb-4 space-y-1">
-  <a href="" class="hover:bg-coke-600 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-    <i class="fas fa-chart-bar mr-3 flex-shrink-0 h-6 w-6 text-primary-50"></i>
-    Dashboard
-  </a>
+<nav class="flex-1 px-4 pb-4 space-y-2">
+  <%= link_to(new_site_folder_path(filters: { parent_folder_id: @filters.folder_id }), class: "inline-flex justify-center items-center text-sm font-medium text-center text-white rounded-lg transition-all hover:opacity-75 focus:ring-4 focus:outline-none") do %>
+    <i class="fa-solid fa-folder-plus mr-2"></i>
+    <%= t('views.components.new_folder.button') %>
+  <% end %>
+  <%= link_to(new_site_archive_path(filters: { folder_id: @filters.folder_id }), class: "inline-flex justify-center items-center text-sm font-medium text-center text-white rounded-lg transition-all hover:opacity-75 focus:ring-4 focus:outline-none") do %>
+    <i class="fa-solid fa-file-export mr-2"></i>
+    <%= t('views.components.new_archives.button') %>
+  <% end %>
+  <hr class="my-4 bg-white w-[90%] mx-auto" />
+  <div class="text-sm font-medium text-left text-white">
+    <p>Total de pastas: <%= @totals[:folders] %></p>
+    <p>Total de arquivos: <%= @totals[:archives] %></p>
+    <p>Armazemento utilizado: <%= @total_size %></p>
+  </div>
 </nav>
-
-  
