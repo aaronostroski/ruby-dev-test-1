@@ -17,13 +17,13 @@
       </p>
     </p>
     <div class="flex items-center gap-x-2 mt-4">
-      <%= link_to(download_site_archive_path(archive.id), title: "Download") do %>
+      <%= link_to(download_site_archive_path(archive.id), title: t('views.defaults.download')) do %>
         <i class="fa-solid fa-download text-blue-500"></i>
       <% end %>
-      <%= link_to(download_site_archive_path(archive.id), title: "Editar") do %>
+      <%= link_to(edit_site_archive_path(archive.id), title: t('views.defaults.edit')) do %>
         <i class="fa-solid fa-edit text-primary-500"></i>
       <% end %>
-      <%= link_to(download_site_archive_path(archive.id), title: "Apagar") do %>
+      <%= link_to(site_archive_path(archive.id), title: t('views.defaults.destroy'), data: { turbo_method: :delete, turbo_confirm: t('views.defaults.delete_confirmation') }) do %>
         <i class="fa-solid fa-trash text-red-500"></i>
       <% end %>
     </div>

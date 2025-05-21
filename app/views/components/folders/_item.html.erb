@@ -6,9 +6,19 @@
     <p class="text-md font-normal text-gray-900 font-bold dark:text-gray-400">
       <%= folder.name.truncate(25) %>
     </p>
-    <%= link_to(home_path(filters: { folder_id: folder.id }), class: "mt-4 inline-flex justify-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-500 rounded-lg transition-all hover:opacity-75 focus:ring-4 focus:outline-none") do %>
-      <%= t('views.components.folders.item.button') %>
-      <i class="ml-2 fa-solid fa-arrow-right"></i>
-    <% end %>
+    <p class="text-md font-normal text-gray-900 font-bold dark:text-gray-400">
+      <%= folder.description.truncate(25) %>
+    </p>
+    <div class="flex items-center gap-x-2 mt-4">
+      <%= link_to(home_path(filters: { folder_id: folder.id }), title: t('views.defaults.show')) do %>
+        <i class="fa-solid fa-eye text-blue-500"></i>
+      <% end %>
+      <%= link_to(edit_site_folder_path(folder.id), title: t('views.defaults.edit')) do %>
+        <i class="fa-solid fa-edit text-primary-500"></i>
+      <% end %>
+      <%= link_to(site_folder_path(folder.id), title: t("views.defaults.destroy"), data: { turbo_method: :delete, turbo_confirm: t('views.defaults.delete_confirmation') }) do %>
+        <i class="fa-solid fa-trash text-red-500"></i>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -5,3 +5,8 @@ pt-BR:
       sucessfully_created: Criado com sucesso
       save: Salvar
       back: Voltar
+      download: Download
+      edit: Editar
+      destroy: Apagar
+      delete_confirmation: Deseja apagar este registro?
+      show: Visualizar
