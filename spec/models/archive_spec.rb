@@ -28,7 +28,7 @@ RSpec.describe Archive, type: :model do
   it 'Archive is a video' do
     archive_video = FactoryBot.create(:archive, :video)
     expect(archive_video.video?).to be true
-  end
+  end    
 
   describe 'Validations' do
     it 'File should be present' do

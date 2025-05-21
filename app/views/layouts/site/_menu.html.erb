@@ -11,6 +11,6 @@
   <div class="text-sm font-medium text-left text-white">
     <p>Total de pastas: <%= @totals[:folders] %></p>
     <p>Total de arquivos: <%= @totals[:archives] %></p>
-    <p>Armazemento utilizado: <%= @total_size %></p>
+    <p>Armazemento utilizado: <%= human_size(@totals[:size]) %></p>
   </div>
 </nav>

@@ -28,12 +28,5 @@ class Site::HomeController < SiteController
   def set_filters
     @filters = OpenStruct.new(params[:filters])
   end
-
-  def set_totals
-    @totals = {
-      folders: Folder.count,
-      archives: Archive.count
-    }
-  end
 end
   

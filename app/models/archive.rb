@@ -6,19 +6,7 @@ class Archive < ApplicationRecord
   validates :name, :file, presence: true
 
   before_validation :set_name, if: -> { name.blank? }
-
-  def human_size
-    units = %w[B KB MB GB TB]
-    size = file.blob.byte_size.to_f
-    index = 0
-
-    while size >= 1024 && index < units.length - 1
-      size /= 1024
-      index += 1
-    end
-
-    "#{format('%.2f', size)} #{units[index]}"
-  end
+  before_create :set_size
 
   def type
     type = file&.blob&.content_type
@@ -55,5 +43,9 @@ class Archive < ApplicationRecord
 
   def set_name
     self.name = filename
+  end
+
+  def set_size
+    self.size = file.blob.byte_size
   end
 end

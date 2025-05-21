@@ -18,6 +18,7 @@ RSpec.describe CreateNewArchives do
       expect(archive.description).to eq 'Description'
       expect(archive.type).to eq 'pdf'
       expect(archive.file).to be_attached
+      expect(archive.size).to be_present
       expect(archive.folder).to be_nil
     end
 
@@ -35,6 +36,7 @@ RSpec.describe CreateNewArchives do
       expect(archive.description).to eq 'Description'
       expect(archive.type).to eq 'pdf'
       expect(archive.file).to be_attached
+      expect(archive.size).to be_present
       expect(archive.folder).to eq folder
     end
 
@@ -56,6 +58,7 @@ RSpec.describe CreateNewArchives do
         expect(archive.description).to eq 'Description'
         expect(archive.type).to eq 'pdf'
         expect(archive.file).to be_attached
+        expect(archive.size).to be_present
         expect(archive.folder).to be_nil
       end
     end
