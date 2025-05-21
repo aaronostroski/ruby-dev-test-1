@@ -7,14 +7,13 @@
       <%= archive.name.truncate(25) %>
     </p>
     <p class="text-md font-normal text-gray-500 dark:text-gray-400">
-      <p class="text-md font-normal text-gray-500 dark:text-gray-400">
-        <%= t('views.components.archive_badge.type', type: archive.content_type.truncate(16)) %>
-      </p>
+      <%= t('views.components.archive_badge.type', type: archive.content_type.truncate(16)) %>
     </p>
     <p class="text-md font-normal text-gray-500 dark:text-gray-400">
-      <p class="text-md font-normal text-gray-500 dark:text-gray-400">
-        <%= t('views.components.archive_badge.size', size: human_size(archive.size)) %>
-      </p>
+      <%= t('views.components.archive_badge.size', size: human_size(archive.size)) %>
+    </p>
+    <p class="text-md font-normal text-gray-900 font-bold dark:text-gray-400">
+      <%= I18n.l(archive.updated_at, format: :full_text_search) %>
     </p>
     <div class="flex items-center gap-x-2 mt-4">
       <%= link_to(download_site_archive_path(archive.id), title: t('views.defaults.download')) do %>
