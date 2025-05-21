@@ -6,7 +6,7 @@ class Archive < ApplicationRecord
   validates :name, :file, presence: true
 
   before_validation :set_name, if: -> { name.blank? }
-  before_create :set_size
+  before_save :set_size, if: -> { attachment_changes.any? }
 
   def type
     type = file&.blob&.content_type

@@ -4,13 +4,5 @@
 
 import { application } from "./application"
 
-
-import TurboModalController from "./turbo_modal_controller"
-application.register("turbo-modal", TurboModalController)
-
-import { Modal } from "tailwindcss-stimulus-components";
-application.register("modal", Modal)
-
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
-

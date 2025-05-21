@@ -3,6 +3,7 @@ pt-BR:
     defaults:
       resource_not_found: Recurso não encontrado
       sucessfully_created: Criado com sucesso
+      sucessfully_updated: Atualizado com sucesso
       save: Salvar
       back: Voltar
       download: Download

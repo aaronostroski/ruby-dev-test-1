@@ -30,6 +30,15 @@ RSpec.describe Archive, type: :model do
     expect(archive_video.video?).to be true
   end    
 
+  it 'Only should set size when file changes' do
+    archive = FactoryBot.create(:archive, :csv)
+    size_before = archive.size
+    expect(size_before).to be_present
+
+    archive.file.attach(Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'test.pdf'), 'application/pdf'))
+    expect(archive.size).to_not eq size_before
+  end
+
   describe 'Validations' do
     it 'File should be present' do
       folder = FactoryBot.create(:folder)

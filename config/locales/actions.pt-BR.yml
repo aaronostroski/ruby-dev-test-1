@@ -15,3 +15,7 @@ pt-BR:
             base:
               folder_not_found: Pasta não encontrada
               files_not_found: Arquivos não encontrados
+        update_archive:
+          attributes:
+            base:
+              folder_not_found: Pasta não encontrada

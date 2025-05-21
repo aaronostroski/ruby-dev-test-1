@@ -1,5 +1,5 @@
 class Site::ArchivesController < SiteController
-  before_action :set_archive, only: [:destroy, :download]
+  before_action :set_archive, only: [:edit, :update, :destroy, :download]
   before_action :set_filters, only: [:new]
 
   def new
@@ -17,6 +17,21 @@ class Site::ArchivesController < SiteController
       redirect_to new_site_archive_path, status: :unprocessable_entity
     end
   end
+
+  def edit; end
+
+  def update
+    action = UpdateArchive.new(form_params.merge(archive_id: @archive.id).to_h)
+    
+    if action.save
+      flash[:success] = t('views.defaults.sucessfully_updated')
+      redirect_to home_path(filters: { folder_id: action&.folder&.id })
+    else
+      flash[:error] = action.errors.full_messages.join(', ')
+      redirect_to edit_site_archive_path, status: :unprocessable_entity
+    end
+  end
+
 
   def destroy
     @archive.destroy
@@ -43,6 +58,7 @@ class Site::ArchivesController < SiteController
       :folder_id,
       :name, 
       :description, 
+      :file,
       files: []
     )
   end

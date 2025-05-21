@@ -23,6 +23,30 @@ RSpec.describe Site::ArchivesController, type: :controller do
       expect(archive.file).to be_attached
     end
 
+
+    it 'Updates archive'do
+      archive = FactoryBot.create(:archive, :csv)
+      params = {
+        id: archive.id,
+        archive: {
+          name: FFaker::Lorem.word,
+          description: FFaker::Lorem.sentence,
+          file: Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'test.pdf'), 'application/pdf')
+        }
+      }
+            
+      patch :update, params: params
+
+      expect(response).to have_http_status(302)
+      archive.reload
+
+      expect(archive).to be_present      
+      expect(archive.name).to eql(params[:archive][:name])
+      expect(archive.description).to eql(params[:archive][:description])
+      expect(archive.filename).to eql('test.pdf')
+      expect(archive.file).to be_attached
+    end
+
     it 'Destroy Archive' do
       archive = FactoryBot.create(:archive)
       params = {

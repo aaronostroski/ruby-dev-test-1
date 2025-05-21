@@ -26,7 +26,7 @@ class Site::FoldersController < SiteController
     action = UpdateFolder.new(form_params.merge(folder_id: @folder.id).to_h)
     
     if action.save
-      flash[:success] = t('views.defaults.sucessfully_created')
+      flash[:success] = t('views.defaults.sucessfully_updated')
       redirect_to home_path(filters: { folder_id: action&.parent_folder&.id })
     else
       flash[:error] = action.errors.full_messages.join(', ')

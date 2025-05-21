@@ -5,7 +5,7 @@ RSpec.describe CreateNewArchives do
   let(:files) { [ Rack::Test::UploadedFile.new(Rails.root.join('spec', 'fixtures', 'test.pdf'), 'application/pdf') ] }
 
   describe 'Happy path' do
-    it 'User creates news archives with no parent folder' do
+    it 'User creates news archives with no folder' do
       action = described_class.new(description: 'Description', files:)
 
       expect(action).to be_valid
@@ -22,7 +22,7 @@ RSpec.describe CreateNewArchives do
       expect(archive.folder).to be_nil
     end
 
-    it 'User creates new folder with parent folder' do
+    it 'User creates new folder with folder' do
       folder = FactoryBot.create(:folder)
       action = described_class.new(description: 'Description', folder_id: folder.id, files:)
 
