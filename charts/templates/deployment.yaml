@@ -1,13 +1,53 @@
-env:
-  - name: RAILS_ENV
-    value: {{ .Values.env.RAILS_ENV | quote }}
-{{- range $key, $val := .Values.secretEnv }}
-  - name: {{ $key }}
-    valueFrom:
-      secretKeyRef:
-        name: {{ $val.secretName }}
-        key: {{ $val.key }}
-{{- end }}
-envFrom:
-  - configMapRef:
-      name: {{ .Values.configMapRef }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ruby-dev-test-1.fullname" . }}
+  labels:
+    app: {{ include "ruby-dev-test-1.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "ruby-dev-test-1.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "ruby-dev-test-1.name" . }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.containerPort }}
+          env:
+            - name: RAILS_ENV
+              value: {{ .Values.env.RAILS_ENV | quote }}
+            - name: RAILS_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secretEnv.RAILS_MASTER_KEY.secretName }}
+                  key: {{ .Values.secretEnv.RAILS_MASTER_KEY.key }}
+            - name: RUBY_DEV_TEST_1_DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secretEnv.RUBY_DEV_TEST_1_DATABASE_HOST.secretName }}
+                  key: {{ .Values.secretEnv.RUBY_DEV_TEST_1_DATABASE_HOST.key }}
+            - name: RUBY_DEV_TEST_1_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secretEnv.RUBY_DEV_TEST_1_DATABASE_PASSWORD.secretName }}
+                  key: {{ .Values.secretEnv.RUBY_DEV_TEST_1_DATABASE_PASSWORD.key }}
+            - name: RUBY_DEV_TEST_1_DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secretEnv.RUBY_DEV_TEST_1_DATABASE_USERNAME.secretName }}
+                  key: {{ .Values.secretEnv.RUBY_DEV_TEST_1_DATABASE_USERNAME.key }}
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secretEnv.SECRET_KEY_BASE.secretName }}
+                  key: {{ .Values.secretEnv.SECRET_KEY_BASE.key }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.configMapRef }}

@@ -1,3 +1,7 @@
+{{- define "ruby-dev-test-1.name" -}}
+{{ .Chart.Name }}
+{{- end }}
+
 {{- define "ruby-dev-test-1.fullname" -}}
-{{ .Release.Name }}-ruby-dev-test-1
+{{ printf "%s-%s" .Release.Name .Chart.Name }}
 {{- end }}
