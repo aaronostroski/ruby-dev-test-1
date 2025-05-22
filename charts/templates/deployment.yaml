@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-deployment
+  name: {{ .Release.Name }}
   labels:
     app: {{ .Release.Name }}
 spec:
@@ -48,6 +48,4 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secretEnv.SECRET_KEY_BASE.secretName }}
                   key: {{ .Values.secretEnv.SECRET_KEY_BASE.key }}
-          envFrom:
-            - configMapRef:
-                name: {{ .Values.configMapRef }}
+                  
