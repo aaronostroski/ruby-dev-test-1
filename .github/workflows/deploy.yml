@@ -12,7 +12,7 @@ on:
 env:
   AWS_REGION: sa-east-1
   ECR_REPOSITORY: ecr-click-test/ruby-dev-test-1
-  CLUSTER_NAME: your-eks-cluster-name
+  CLUSTER_NAME: click-testt
   NAMESPACE: webapp-ruby-dev-test-1
   CHART_DIR: ./charts
 
