@@ -1,0 +1,51 @@
+replicaCount: 1
+
+image:
+  repository: 915751112373.dkr.ecr.sa-east-1.amazonaws.com/ecr-click-test/ruby-dev-test-1
+  tag: latest
+  pullPolicy: Always
+
+containerPort: 3000
+
+env:
+  RAILS_ENV: production
+
+secretEnv:
+  RAILS_MASTER_KEY:
+    secretName: rails-secrets
+    key: RAILS_MASTER_KEY
+  SECRET_KEY_BASE:
+    secretName: rails-secrets
+    key: SECRET_KEY_BASE
+  RUBY_DEV_TEST_1_DATABASE_USERNAME:
+    secretName: rails-secrets
+    key: RUBY_DEV_TEST_1_DATABASE_USERNAME
+  RUBY_DEV_TEST_1_DATABASE_PASSWORD:
+    secretName: rails-secrets
+    key: RUBY_DEV_TEST_1_DATABASE_PASSWORD
+  RUBY_DEV_TEST_1_DATABASE_HOST:
+    secretName: rails-secrets
+    key: RUBY_DEV_TEST_1_DATABASE_HOST
+
+configMapRef: web-config
+
+readinessProbe:
+  path: /up
+  port: 3000
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  failureThreshold: 3
+
+livenessProbe:
+  path: /up
+  port: 3000
+  initialDelaySeconds: 30
+  periodSeconds: 15
+  failureThreshold: 3
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 75
+  targetMemoryUtilizationPercentage: 75

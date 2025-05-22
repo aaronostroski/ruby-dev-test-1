@@ -1,0 +1,13 @@
+env:
+  - name: RAILS_ENV
+    value: {{ .Values.env.RAILS_ENV | quote }}
+{{- range $key, $val := .Values.secretEnv }}
+  - name: {{ $key }}
+    valueFrom:
+      secretKeyRef:
+        name: {{ $val.secretName }}
+        key: {{ $val.key }}
+{{- end }}
+envFrom:
+  - configMapRef:
+      name: {{ .Values.configMapRef }}
