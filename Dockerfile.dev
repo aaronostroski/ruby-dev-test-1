@@ -13,7 +13,7 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
 # Add JS build dependencies
-RUN yarn add --dev esbuild tailwindcss
+RUN yarn add --dev esbuild tailwindcss@^3.3.1
 RUN yarn add esbuild-wasm
 
 COPY package.json yarn.lock ./
