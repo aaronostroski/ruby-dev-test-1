@@ -60,12 +60,4 @@ jobs:
             --create-namespace \
             --set image.repository=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }} \
             --set image.tag=latest
-          
-          echo kubectl get pods -n $NAMESPACE
-          
-      - name: Run Rails DB Migrate
-        run: |
-          kubectl rollout status deployment/ruby-dev-test-1 -n $NAMESPACE
-
-          POD_NAME=$(kubectl get pods -n $NAMESPACE -l app=ruby-dev-test-1 -o jsonpath="{.items[0].metadata.name}")
-          kubectl exec -n $NAMESPACE $POD_NAME -- bundle exec rails db:migrate
+            
