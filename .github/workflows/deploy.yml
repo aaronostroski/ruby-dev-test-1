@@ -55,6 +55,8 @@ jobs:
 
       - name: Deploy Helm chart
         run: |
+          IMAGE_TAG=${{ github.run_number }}
+          
           helm upgrade --install ruby-dev-test-1 $CHART_DIR \
             --wait \
             --namespace $NAMESPACE \
