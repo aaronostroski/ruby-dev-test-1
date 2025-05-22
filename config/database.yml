@@ -88,8 +88,9 @@ production:
   primary: &primary_production
     <<: *default
     database: ruby_dev_test_1_production
-    username: ruby_dev_test_1
+    username: <%= ENV["RUBY_DEV_TEST_1_DATABASE_USERNAME"] %>
     password: <%= ENV["RUBY_DEV_TEST_1_DATABASE_PASSWORD"] %>
+    host: <%= ENV["RUBY_DEV_TEST_1_DATABASE_HOST"] %>
   cache:
     <<: *primary_production
     database: ruby_dev_test_1_production_cache
