@@ -61,7 +61,7 @@ test:
   <<: *default
   database: ruby_dev_test_1_test
   host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
-  username: <%= ENV.fetch("DATABASE_USER", "postgres") %>
+  username: <%= ENV.fetch("DATABASE_USER", "") %>
   password: <%= ENV.fetch("DATABASE_PASSWORD", "") %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
