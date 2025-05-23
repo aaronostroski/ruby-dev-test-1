@@ -1,6 +1,6 @@
 module ApplicationHelper
   def human_size(size)
-    return '0 B' if size.nil? || size <= 0
+    return "0 B" if size.nil? || size <= 0
 
     units = %w[B KB MB GB TB]
     index = 0

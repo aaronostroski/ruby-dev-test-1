@@ -39,9 +39,9 @@ RSpec.describe Folder, type: :model do
       result = root_folder.all_sulfolders_with_archives
 
       expect(result).to eq({
-        root_folder => [archive1],
-        child_folder1 => [archive2],
-        child_folder2 => [archive3]
+        root_folder => [ archive1 ],
+        child_folder1 => [ archive2 ],
+        child_folder2 => [ archive3 ]
       })
     end
 

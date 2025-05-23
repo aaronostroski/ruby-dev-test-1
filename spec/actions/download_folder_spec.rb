@@ -68,7 +68,7 @@ RSpec.describe DownloadFolder do
 
       action = described_class.new(export_file_id: export_file.id)
 
-      allow(action).to receive(:content).and_return({ root_folder => [archive] })
+      allow(action).to receive(:content).and_return({ root_folder => [ archive ] })
       allow(archive.file.blob).to receive(:download).and_raise(StandardError, "Test error")
 
       expect { action.run }.not_to raise_error
