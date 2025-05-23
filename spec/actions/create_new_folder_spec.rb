@@ -33,7 +33,7 @@ RSpec.describe CreateNewFolder do
       files = [
         Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.zip'), 'application/zip'),
         Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.jpeg'), 'image/jpeg'),
-        Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.pdf'), 'application/pdf'),
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.pdf'), 'application/pdf')
       ]
 
       action = described_class.new(name: 'New Folder', description: 'Description', files:)

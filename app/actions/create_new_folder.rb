@@ -31,7 +31,7 @@ class CreateNewFolder < ApplicationAction
 
   private
 
-  def folder_should_be_valid    
+  def folder_should_be_valid
     errors.merge!(folder.errors) unless folder.valid?
   end
 

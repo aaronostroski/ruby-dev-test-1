@@ -8,7 +8,7 @@ class Site::FoldersController < SiteController
     @folder = Folder.new
   end
 
-  def create   
+  def create
     action = CreateNewFolder.new(form_params.to_h)
 
     if action.save
