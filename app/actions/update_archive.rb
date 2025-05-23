@@ -16,7 +16,7 @@ class UpdateArchive < ApplicationAction
     @archive ||= Archive.find_by(id: archive_id).tap do |archive|
       archive.name = name
       archive.description = description
-      archive.file = file
+      archive.file = file if file.present?
       archive.folder = folder
     end
   end

@@ -1,7 +1,7 @@
 require "ostruct"
 
 class Site::HomeController < SiteController
-  PER_PAGE = 11
+  PER_PAGE = 9
   before_action :set_filters, :set_folders, :set_archives, :set_current_folder, :set_totals, only: [ :index ]
 
   def index; end

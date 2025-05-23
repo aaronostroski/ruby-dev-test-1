@@ -59,12 +59,5 @@ RSpec.describe UpdateArchive do
       expect(action).not_to be_valid
       expect(action.errors.full_messages).to include('Pasta não encontrada')
     end
-
-    it 'When passed files is nil' do
-      action = described_class.new(archive_id: archive.id, description: 'Description')
-
-      expect(action).not_to be_valid
-      expect(action.errors.full_messages).to include('File não pode ficar em branco')
-    end
   end
 end
