@@ -6,7 +6,11 @@ RSpec.describe Site::FoldersController, type: :controller do
       params = {
         folder: {
             name: FFaker::Lorem.word,
-            description: FFaker::Lorem.sentence
+            description: FFaker::Lorem.sentence,
+            files: [
+              Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.zip'), 'application/zip'),
+              Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.jpeg'), 'image/jpeg'),
+            ]
         }
       }
 
@@ -15,10 +19,11 @@ RSpec.describe Site::FoldersController, type: :controller do
       expect(response).to have_http_status(302)
 
       folder = Folder.last
-
+            
       expect(folder).to be_present
       expect(folder.name).to eql(params[:folder][:name])
       expect(folder.description).to eql(params[:folder][:description])
+      expect(folder.archives.count).to be 2
     end
 
     it 'Updates folder' do

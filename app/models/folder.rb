@@ -3,6 +3,7 @@ class Folder < ApplicationRecord
 
   has_many :parent_folders, class_name: "Folder", dependent: :destroy, foreign_key: :parent_folder_id
   has_many :archives, dependent: :destroy
+  accepts_nested_attributes_for :archives, allow_destroy: true
 
   validates :name, presence: true
 

@@ -28,6 +28,26 @@ RSpec.describe CreateNewFolder do
       expect(action.folder.parent_folder).to eq parent_folder
       expect(action.folder.archives).to be_empty
     end
+
+    it 'If user creates new folder passing files to it, it should create the archives' do
+      files = [
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.zip'), 'application/zip'),
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.jpeg'), 'image/jpeg'),
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.pdf'), 'application/pdf'),
+      ]
+
+      action = described_class.new(name: 'New Folder', description: 'Description', files:)
+
+      expect(action).to be_valid
+      expect(action.save).to be true
+
+      expect(action.folder).to be_persisted
+      expect(action.folder.name).to eq 'New Folder'
+      expect(action.folder.description).to eq 'Description'
+      expect(action.folder.archives.count).to eq 3
+      expect(action.folder.archives.pluck(:folder_id)).to all(eq action.folder.id)
+      expect(action.folder.archives.pluck(:name)).to include('test.zip', 'test.jpeg', 'test.pdf')
+    end
   end
 
   describe 'Validations' do
