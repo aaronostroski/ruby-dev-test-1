@@ -63,6 +63,7 @@ jobs:
             --create-namespace \
             --set image.repository=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }} \
             --set image.tag=$IMAGE_TAG
+            --set goodjob.image.tag=$IMAGE_TAG
             
       - name: Check deployed pods
         run: kubectl get pods -n $NAMESPACE
