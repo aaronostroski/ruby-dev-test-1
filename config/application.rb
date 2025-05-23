@@ -20,6 +20,8 @@ module RubyDevTest1
     config.i18n.available_locales = [ "pt-BR", :en ]
     config.i18n.default_locale = "pt-BR"
 
+    config.active_job.queue_adapter = :good_job
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

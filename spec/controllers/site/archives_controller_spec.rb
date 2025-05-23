@@ -58,6 +58,20 @@ RSpec.describe Site::ArchivesController, type: :controller do
       expect(response).to have_http_status(302)
       expect(Archive.count).to be 0
     end
+
+    it 'Download Archive' do
+      archive = FactoryBot.create(:archive, :csv)
+
+      params = {
+        id: archive.id
+      }
+
+      get :download, params: params
+
+      expect(response).to have_http_status(200)
+      expect(response.header['Content-Disposition']).to include('attachment')
+      expect(response.header['Content-Type']).to include('text/csv')
+    end
   end
 
   describe 'Validations' do

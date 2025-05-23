@@ -19,3 +19,7 @@ pt-BR:
           attributes:
             base:
               folder_not_found: Pasta não encontrada
+        download_folder:
+          attributes:
+            base:
+              folder_not_found: Pasta não encontrada

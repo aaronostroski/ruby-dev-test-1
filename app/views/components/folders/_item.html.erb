@@ -13,6 +13,9 @@
       <%= I18n.l(folder.updated_at, format: :full_text_search) %>
     </p>
     <div class="flex items-center gap-x-2 mt-4">
+      <%= link_to(download_site_folder_path(folder.id), title: t('views.defaults.download')) do %>
+        <i class="fa-solid fa-download text-blue-500"></i>
+      <% end %>
       <%= link_to(home_path(filters: { folder_id: folder.id }), title: t('views.defaults.show')) do %>
         <i class="fa-solid fa-eye text-blue-500"></i>
       <% end %>

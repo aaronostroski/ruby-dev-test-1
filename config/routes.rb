@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount GoodJob::Engine => "good_job"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -14,8 +15,17 @@ Rails.application.routes.draw do
   get "home" => "site/home#index", as: :home
 
   namespace :site do
-    resources :folders, except: [ :index, :show ]
+    resources :folders, except: [ :index, :show ] do
+      member do
+        get :download
+      end
+    end
     resources :archives, except: [ :index, :show ] do
+      member do
+        get :download
+      end
+    end
+    resources :export_files, only: [ :index ] do
       member do
         get :download
       end

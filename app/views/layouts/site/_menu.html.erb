@@ -7,6 +7,10 @@
     <i class="fa-solid fa-file-export mr-2"></i>
     <%= t('views.components.new_archives.button') %>
   <% end %>
+  <%= link_to(site_export_files_path, class: "inline-flex justify-center items-center text-sm font-medium text-center text-white rounded-lg transition-all hover:opacity-75 focus:ring-4 focus:outline-none") do %>
+    <i class="fa-solid fa-file-export mr-2"></i>
+    <%= I18n.t('.site.export_files.index.heading') %>
+  <% end %>
   <hr class="my-4 bg-white w-[90%] mx-auto" />
   <div class="text-sm font-medium text-left text-white">
     <p>Total de pastas: <%= @totals[:folders] %></p>

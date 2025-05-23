@@ -22,7 +22,7 @@ RSpec.describe CreateNewArchives do
       expect(archive.folder).to be_nil
     end
 
-    it 'User creates new folder with folder' do
+    it 'User creates new folder with files' do
       folder = FactoryBot.create(:folder)
       action = described_class.new(description: 'Description', folder_id: folder.id, files:)
 

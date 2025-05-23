@@ -26,6 +26,40 @@ RSpec.describe Folder, type: :model do
     end
   end
 
+  describe 'Folder and subfolders' do
+    it 'Should return all subfolders and archives' do
+      root_folder = FactoryBot.create(:folder, parent_folder: nil)
+      child_folder1 = FactoryBot.create(:folder, parent_folder: root_folder)
+      child_folder2 = FactoryBot.create(:folder, parent_folder: child_folder1)
+
+      archive1 = FactoryBot.create(:archive, folder: root_folder)
+      archive2 = FactoryBot.create(:archive, folder: child_folder1)
+      archive3 = FactoryBot.create(:archive, folder: child_folder2)
+
+      result = root_folder.all_sulfolders_with_archives
+
+      expect(result).to eq({
+        root_folder => [archive1],
+        child_folder1 => [archive2],
+        child_folder2 => [archive3]
+      })
+    end
+
+    it 'Should return all subfolders and archives with no archives' do
+      root_folder = FactoryBot.create(:folder, parent_folder: nil)
+      child_folder1 = FactoryBot.create(:folder, parent_folder: root_folder)
+      child_folder2 = FactoryBot.create(:folder, parent_folder: child_folder1)
+
+      result = root_folder.all_sulfolders_with_archives
+
+      expect(result).to eq({
+        root_folder => [],
+        child_folder1 => [],
+        child_folder2 => []
+      })
+    end
+  end
+
   describe 'Validations' do
     it 'Name should be present' do
       folder = FactoryBot.build(:folder, name: nil)

@@ -1,0 +1,19 @@
+pt-BR:
+  activerecord:
+    attributes:
+      export_file:
+        filename: Nome do Arquivo
+        finished_at: Finalizado em
+        error_at: Erro em
+        error_message: Mensagem de erro
+        requested_at: Solicitado em
+        size: Tamanho
+        started_at: Iniciado em
+        created_at: :views.defaults.created_at
+        updated_at: :views.defaults.updated_at
+        status_label: Status
+        status:
+          requested: Solicitado
+          started: Iniciado
+          finished: Finalizado
+          error: Erro

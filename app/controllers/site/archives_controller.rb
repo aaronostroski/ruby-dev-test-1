@@ -40,6 +40,7 @@ class Site::ArchivesController < SiteController
 
   def download
     if @archive.file.attached?
+      flash[:success] = t("views.defaults.sucessfully_downloaded")
       send_data @archive.file.download,
                 filename: @archive.filename,
                 type: @archive.content_type,

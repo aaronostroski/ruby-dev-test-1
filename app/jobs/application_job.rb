@@ -1,4 +1,5 @@
 class ApplicationJob < ActiveJob::Base
+  retry_on StandardError, wait: 5.minutes, attempts: 3
   # Automatically retry jobs that encountered a deadlock
   # retry_on ActiveRecord::Deadlocked
 

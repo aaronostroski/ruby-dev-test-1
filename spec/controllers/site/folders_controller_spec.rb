@@ -57,6 +57,18 @@ RSpec.describe Site::FoldersController, type: :controller do
       expect(response).to have_http_status(302)
       expect(Folder.count).to be 0
     end
+
+    it 'Download folder' do
+      ActiveJob::Base.queue_adapter = :test
+      folder = FactoryBot.create(:folder)
+      params = {
+        id: folder.id
+      }
+
+      expect { get :download, params: params }.to have_enqueued_job(DownloadFolderJob).with(anything)
+
+      expect(response).to have_http_status(302)
+    end
   end
 
   describe 'Validations' do
