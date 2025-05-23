@@ -3,7 +3,7 @@ FROM ruby:3.2.4
 WORKDIR /myapp
 
 # Install Node.js and Yarn from NodeSource (correct version)
-RUN apt-get update -qq && apt-get install -y curl gnupg2 build-essential libpq-dev \
+RUN apt-get update -qq && apt-get install -y curl gnupg2 build-essential libpq-dev zip unzip \
   && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
   && apt-get install -y nodejs \
   && npm install -g yarn \
