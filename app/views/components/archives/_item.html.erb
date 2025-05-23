@@ -1,5 +1,5 @@
 <div class="bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 flex flex-col">
-  <%= link_to(download_site_archive_path(archive.id), class: "grow bg-gray-100 h-52 w-full flex items-center justify-center rounded-t-lg") do %>
+  <%= link_to(download_site_archive_path(archive.id), target: "_blank", class: "grow bg-gray-100 h-52 w-full flex items-center justify-center rounded-t-lg") do %>
     <%= render('components/archives/archive_badge', archive:)%>
   <% end %>
   <div class="p-5 flex flex-col justify-between grow">
@@ -16,7 +16,7 @@
       <%= I18n.l(archive.updated_at, format: :full_text_search) %>
     </p>
     <div class="flex items-center gap-x-2 mt-4">
-      <%= link_to(download_site_archive_path(archive.id), title: t('views.defaults.download')) do %>
+      <%= link_to(download_site_archive_path(archive.id), target: "_blank", title: t('views.defaults.download')) do %>
         <i class="fa-solid fa-download text-blue-500"></i>
       <% end %>
       <%= link_to(edit_site_archive_path(archive.id), title: t('views.defaults.edit')) do %>

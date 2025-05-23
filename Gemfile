@@ -68,4 +68,4 @@ group :development do
   gem "web-console"
 end
 
-gem "good_job", "~> 4.10"
+gem "good_job", ">= 4.10.1"

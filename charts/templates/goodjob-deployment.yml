@@ -1,0 +1,49 @@
+{{- if .Values.goodjob.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-goodjob
+spec:
+  replicas: {{ .Values.goodjob.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-goodjob
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-goodjob
+    spec:
+      containers:
+        - name: goodjob
+          image: "{{ .Values.goodjob.image.repository }}:{{ .Values.goodjob.image.tag }}"
+          imagePullPolicy: {{ .Values.goodjob.image.pullPolicy }}
+          command: {{ toJson .Values.goodjob.command }}
+          env:
+            - name: RAILS_ENV
+              value: {{ .Values.goodjob.env.RAILS_ENV }}
+            - name: RAILS_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.goodjob.secretEnv.RAILS_MASTER_KEY.secretName }}
+                  key: {{ .Values.goodjob.secretEnv.RAILS_MASTER_KEY.key }}
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.goodjob.secretEnv.SECRET_KEY_BASE.secretName }}
+                  key: {{ .Values.goodjob.secretEnv.SECRET_KEY_BASE.key }}
+            - name: RUBY_DEV_TEST_1_DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.goodjob.secretEnv.RUBY_DEV_TEST_1_DATABASE_USERNAME.secretName }}
+                  key: {{ .Values.goodjob.secretEnv.RUBY_DEV_TEST_1_DATABASE_USERNAME.key }}
+            - name: RUBY_DEV_TEST_1_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.goodjob.secretEnv.RUBY_DEV_TEST_1_DATABASE_PASSWORD.secretName }}
+                  key: {{ .Values.goodjob.secretEnv.RUBY_DEV_TEST_1_DATABASE_PASSWORD.key }}
+            - name: RUBY_DEV_TEST_1_DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.goodjob.secretEnv.RUBY_DEV_TEST_1_DATABASE_HOST.secretName }}
+                  key: {{ .Values.goodjob.secretEnv.RUBY_DEV_TEST_1_DATABASE_HOST.key }}
+{{- end }}

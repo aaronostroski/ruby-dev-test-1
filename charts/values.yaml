@@ -1,5 +1,8 @@
 replicaCount: 1
 
+goodjob:
+  replicaCount: 1
+
 image:
   repository: 915751112373.dkr.ecr.sa-east-1.amazonaws.com/ecr-click-test/ruby-dev-test-1
   tag: latest
@@ -10,6 +13,33 @@ containerPort: 3000
 env:
   RAILS_ENV: production
 
+goodjob:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: 915751112373.dkr.ecr.sa-east-1.amazonaws.com/ecr-click-test/ruby-dev-test-1
+    tag: latest
+    pullPolicy: Always
+  command: ["bundle", "exec", "good_job", "start"]
+  env:
+    RAILS_ENV: production
+  secretEnv:
+    RAILS_MASTER_KEY:
+      secretName: rails-secrets
+      key: RAILS_MASTER_KEY
+    SECRET_KEY_BASE:
+      secretName: rails-secrets
+      key: SECRET_KEY_BASE
+    RUBY_DEV_TEST_1_DATABASE_USERNAME:
+      secretName: rails-secrets
+      key: RUBY_DEV_TEST_1_DATABASE_USERNAME
+    RUBY_DEV_TEST_1_DATABASE_PASSWORD:
+      secretName: rails-secrets
+      key: RUBY_DEV_TEST_1_DATABASE_PASSWORD
+    RUBY_DEV_TEST_1_DATABASE_HOST:
+      secretName: rails-secrets
+      key: RUBY_DEV_TEST_1_DATABASE_HOST
+      
 secretEnv:
   RAILS_MASTER_KEY:
     secretName: rails-secrets
