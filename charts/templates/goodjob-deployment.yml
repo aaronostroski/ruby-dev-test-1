@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: goodjob
-          image: "{{ .Values.goodjob.image.repository }}:{{ .Values.goodjob.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.goodjob.image.pullPolicy }}
           command: {{ toJson .Values.goodjob.command }}
           env:
