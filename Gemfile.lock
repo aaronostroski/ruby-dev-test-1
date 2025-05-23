@@ -432,7 +432,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   ffaker
-  good_job (>= 4.10.1)
+  good_job (~> 4.5)
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
