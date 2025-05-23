@@ -14,7 +14,7 @@
   <i class="fa-solid fa-folder-closed w-auto h-6 mr-2 text-gray-900"></i>
   <h2 class="text-2xl font-semibold text-gray-900 transition-all hover:opacity-80"><%= t('.heading_folders') %></h2>
 </div>
-<div class="mt-4 grid grid-cols-6 gap-6">
+<div class="mt-4 grid sm:grid-cols-1 md:grid-cols-4 grid-cols-6 gap-6">
   <%= render('components/folders/new_folder') %>
   <% @folders.each do |folder| %>
     <%= render('components/folders/item', folder:) %>
@@ -27,7 +27,7 @@
   <i class="fa-solid fa-file w-auto h-6 mr-2 text-gray-900"></i>
   <h2 class="text-2xl font-semibold text-gray-900 transition-all hover:opacity-80"><%= t('.heading_archives') %></h2>
 </div>
-<div class="mt-4 grid grid-cols-6 gap-6">
+<div class="mt-4 grid sm:grid-cols-1 md:grid-cols-4 grid-cols-6 gap-6">
   <%= render('components/archives/new_archives') %>
   <% @archives.each do |archive| %>
     <%= render('components/archives/item', archive:) %>
