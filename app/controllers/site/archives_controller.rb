@@ -28,9 +28,6 @@ class Site::ArchivesController < SiteController
       redirect_to home_path(filters: { folder_id: action&.folder&.id })
     else
       flash[:error] = action.errors.full_messages.join(", ")
-
-      binding.pry
-
       redirect_to edit_site_archive_path, status: :unprocessable_entity
     end
   end
