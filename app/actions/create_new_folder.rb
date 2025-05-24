@@ -1,15 +1,15 @@
 class CreateNewFolder < ApplicationAction
-  attr_accessor :name, :description, :parent_folder_id, :files
+  attr_accessor :name, :description, :parent_id, :files
 
   validate :folder_should_be_valid
-  validate :parent_folder_should_exist, if: -> { parent_folder_id.present? }
+  validate :parent_should_exist, if: -> { parent_id.present? }
 
   def run
     folder.save
   end
 
-  def parent_folder
-    @parent_folder ||= Folder.find_by(id: parent_folder_id)
+  def parent
+    @parent ||= Folder.find_by(id: parent_id)
   end
 
   def archives
@@ -24,7 +24,7 @@ class CreateNewFolder < ApplicationAction
     @folder ||= Folder.new(
       name:,
       description:,
-      parent_folder:,
+      parent:,
       archives: archives || []
     )
   end
@@ -35,8 +35,8 @@ class CreateNewFolder < ApplicationAction
     errors.merge!(folder.errors) unless folder.valid?
   end
 
-  def parent_folder_should_exist
-    errors.add(:base, :parent_folder_not_found) unless parent_folder.present?
+  def parent_should_exist
+    errors.add(:base, :parent_not_found) unless parent.present?
   end
 
   def archives_should_be_valid

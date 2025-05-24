@@ -10,10 +10,10 @@ RSpec.describe DownloadFolder do
 
   describe 'Happy path' do
     it 'Should zip the folder and all subfolders' do
-      root_folder = FactoryBot.create(:folder, parent_folder: nil)
-      child_folder1 = FactoryBot.create(:folder, parent_folder: root_folder)
-      child_folder2 = FactoryBot.create(:folder, parent_folder: child_folder1)
-      child_folder3 = FactoryBot.create(:folder, parent_folder: child_folder2)
+      root_folder = FactoryBot.create(:folder, parent: nil)
+      child_folder1 = FactoryBot.create(:folder, parent: root_folder)
+      child_folder2 = FactoryBot.create(:folder, parent: child_folder1)
+      child_folder3 = FactoryBot.create(:folder, parent: child_folder2)
 
       archive1 = FactoryBot.create(:archive, folder: root_folder)
       archive2 = FactoryBot.create(:archive, :csv, folder: child_folder1)
@@ -39,10 +39,10 @@ RSpec.describe DownloadFolder do
     end
 
     it 'Should zip the folder and all subfolders with no archives' do
-      root_folder = FactoryBot.create(:folder, parent_folder: nil)
-      child_folder1 = FactoryBot.create(:folder, parent_folder: root_folder)
-      child_folder2 = FactoryBot.create(:folder, parent_folder: child_folder1)
-      child_folder3 = FactoryBot.create(:folder, parent_folder: child_folder2)
+      root_folder = FactoryBot.create(:folder, parent: nil)
+      child_folder1 = FactoryBot.create(:folder, parent: root_folder)
+      child_folder2 = FactoryBot.create(:folder, parent: child_folder1)
+      child_folder3 = FactoryBot.create(:folder, parent: child_folder2)
 
       action = described_class.new(export_file_id: export_file.id)
 

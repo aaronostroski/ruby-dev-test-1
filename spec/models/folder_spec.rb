@@ -7,20 +7,18 @@ RSpec.describe Folder, type: :model do
 
   describe 'Path management' do
     it 'If parent folder is nil, the path is current on root' do
-      root_folder = FactoryBot.create(:folder, parent_folder: nil)
-      expect(root_folder.path).to eql([ root_folder ])
+      root_folder = FactoryBot.create(:folder, parent: nil)
+      expect(root_folder.path.to_a).to eql([ root_folder ])
     end
 
     it 'If parent folder is not nil, the path is not on root' do
-      root_folder = FactoryBot.create(:folder, parent_folder: nil)
-      child_folder1 = FactoryBot.create(:folder, parent_folder: root_folder)
-      child_folder2 = FactoryBot.create(:folder, parent_folder: child_folder1)
+      root_folder = FactoryBot.create(:folder, parent: nil)
+      child_folder1 = FactoryBot.create(:folder, parent: root_folder)
+      child_folder2 = FactoryBot.create(:folder, parent: child_folder1)
 
-      expect(child_folder1.path).to eq([ root_folder, child_folder1 ])
       expect(child_folder1.path.pluck(:id)).to eq([ root_folder.id, child_folder1.id ])
       expect(child_folder1.path.pluck(:name)).to eq([ root_folder.name, child_folder1.name ])
 
-      expect(child_folder2.path).to eq([ root_folder, child_folder1, child_folder2 ])
       expect(child_folder2.path.pluck(:id)).to eq([ root_folder.id, child_folder1.id, child_folder2.id ])
       expect(child_folder2.path.pluck(:name)).to eq([ root_folder.name, child_folder1.name, child_folder2.name ])
     end
@@ -28,9 +26,9 @@ RSpec.describe Folder, type: :model do
 
   describe 'Folder and subfolders' do
     it 'Should return all subfolders and archives' do
-      root_folder = FactoryBot.create(:folder, parent_folder: nil)
-      child_folder1 = FactoryBot.create(:folder, parent_folder: root_folder)
-      child_folder2 = FactoryBot.create(:folder, parent_folder: child_folder1)
+      root_folder = FactoryBot.create(:folder, parent: nil)
+      child_folder1 = FactoryBot.create(:folder, parent: root_folder)
+      child_folder2 = FactoryBot.create(:folder, parent: child_folder1)
 
       archive1 = FactoryBot.create(:archive, folder: root_folder)
       archive2 = FactoryBot.create(:archive, folder: child_folder1)
@@ -46,9 +44,9 @@ RSpec.describe Folder, type: :model do
     end
 
     it 'Should return all subfolders and archives with no archives' do
-      root_folder = FactoryBot.create(:folder, parent_folder: nil)
-      child_folder1 = FactoryBot.create(:folder, parent_folder: root_folder)
-      child_folder2 = FactoryBot.create(:folder, parent_folder: child_folder1)
+      root_folder = FactoryBot.create(:folder, parent: nil)
+      child_folder1 = FactoryBot.create(:folder, parent: root_folder)
+      child_folder2 = FactoryBot.create(:folder, parent: child_folder1)
 
       result = root_folder.all_sulfolders_with_archives
 

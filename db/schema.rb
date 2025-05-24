@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_24_004424) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_24_204733) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -68,12 +68,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_24_004424) do
   end
 
   create_table "folders", force: :cascade do |t|
-    t.bigint "parent_folder_id"
     t.string "name", null: false
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["parent_folder_id"], name: "index_folders_on_parent_folder_id"
+    t.string "ancestry", collation: "C"
+    t.index ["ancestry"], name: "index_folders_on_ancestry"
   end
 
   create_table "good_job_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -170,5 +170,4 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_24_004424) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "archives", "folders"
   add_foreign_key "export_files", "folders"
-  add_foreign_key "folders", "folders", column: "parent_folder_id"
 end

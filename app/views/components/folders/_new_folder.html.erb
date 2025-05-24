@@ -1,12 +1,12 @@
 <div class="flex flex-col bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-  <%= link_to(new_site_folder_path(filters: { parent_folder_id: @filters&.folder_id }), class: "bg-gray-100 h-52 w-full flex items-center justify-center rounded-t-lg") do %>
+  <%= link_to(new_site_folder_path(filters: { parent_id: @filters&.folder_id }), class: "bg-gray-100 h-52 w-full flex items-center justify-center rounded-t-lg") do %>
     <i class="fa-solid fa-folder-plus h-52 w-full"></i>
   <% end %>
   <div class="p-5 flex flex-col justify-between grow">
       <p class="mb-3 font-normal text-gray-900 dark:text-gray-400">
         <%= t("views.components.new_folder.description") %>
       </p>
-      <%= link_to(new_site_folder_path(filters: { parent_folder_id: @filters&.folder_id }), class: "inline-flex justify-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-500 rounded-lg transition-all hover:opacity-75 focus:ring-4 focus:outline-none") do %>
+      <%= link_to(new_site_folder_path(filters: { parent_id: @filters&.folder_id }), class: "inline-flex justify-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-500 rounded-lg transition-all hover:opacity-75 focus:ring-4 focus:outline-none") do %>
         <%= t('views.components.new_folder.button') %>
         <i class="ml-2 fa-solid fa-arrow-right"></i>
       <% end %>

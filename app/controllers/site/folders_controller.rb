@@ -13,7 +13,7 @@ class Site::FoldersController < SiteController
 
     if action.save
       flash[:success] = t("views.defaults.sucessfully_created")
-      redirect_to home_path(filters: { folder_id: action&.archives.any? ? action&.folder&.id : action&.parent_folder&.id })
+      redirect_to home_path(filters: { folder_id: action&.archives.any? ? action&.folder&.id : action&.parent&.id })
     else
       flash[:error] = action.errors.full_messages.join(", ")
       redirect_to new_site_folder_path, status: :unprocessable_entity
@@ -27,7 +27,7 @@ class Site::FoldersController < SiteController
 
     if action.save
       flash[:success] = t("views.defaults.sucessfully_updated")
-      redirect_to home_path(filters: { folder_id: action&.parent_folder&.id })
+      redirect_to home_path(filters: { folder_id: action&.parent&.id })
     else
       flash[:error] = action.errors.full_messages.join(", ")
       redirect_to edit_site_folder_path, status: :unprocessable_entity
@@ -59,7 +59,7 @@ class Site::FoldersController < SiteController
     params.require(:folder).permit(
       :name,
       :description,
-      :parent_folder_id,
+      :parent_id,
       files: []
     )
   end

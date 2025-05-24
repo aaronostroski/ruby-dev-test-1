@@ -10,8 +10,9 @@ class Site::HomeController < SiteController
 
   def set_folders
     folders = Folder.all
-    folders = folders.where(parent_folder_id: @filters.folder_id) if @filters.folder_id.present?
-    folders = folders.where(parent_folder_id: nil) unless @filters.folder_id&.present?
+
+    folders = folders.where(ancestry: "/#{@filters.folder_id}/") if @filters.folder_id.present?
+    folders = folders.where(ancestry: [ "/" ]) unless @filters.folder_id&.present?
 
     @folders = folders.order(:name).page(params[:folders_page]).per(PER_PAGE)
   end

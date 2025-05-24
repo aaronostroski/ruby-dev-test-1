@@ -10,8 +10,7 @@ class DownloadFolder < ApplicationAction
   def run
     export_file.update!(started_at: Time.current, error_at: nil, error_message: nil)
 
-    folder_dir = Rails.root.join(ZIP_PATH, export_file.id.to_s)
-    folder_dir.mkpath
+    folder_dir = Rails.root.join(ZIP_PATH, export_file.id.to_s).tap(&:mkpath)
 
     timestamp = I18n.l(Time.current, format: :job_datetime).parameterize
     zip_filename = "#{folder.name}-#{timestamp}.zip"
@@ -27,12 +26,12 @@ class DownloadFolder < ApplicationAction
           next unless archive.file.attached?
 
           ext = File.extname(archive.filename.to_s)
-          file_path = folder_dir.join("archive_#{archive.id}#{ext}")
+          temp_file_path = folder_dir.join("archive_#{archive.id}#{ext}")
 
-          File.open(file_path, "wb") { |f| f.write(archive.file.download) }
+          download_archive_file(archive, temp_file_path)
+          add_to_zip(zip, folder_path, archive, temp_file_path)
 
-          zip.add("#{folder_path}/#{archive.file.filename}", file_path)
-          temp_paths << file_path
+          temp_paths << temp_file_path
         end
       end
     end
@@ -64,7 +63,12 @@ class DownloadFolder < ApplicationAction
 
   private
 
-  def sanitize_filename(filename)
-    filename.gsub("\0", "")
+  def download_archive_file(archive, path)
+    File.open(path, "wb") { |f| f.write(archive.file.download) }
+  end
+
+  def add_to_zip(zip, folder_path, archive, file_path)
+    zip_path = "#{folder_path}/#{archive.file.filename}"
+    zip.add(zip_path, file_path)
   end
 end

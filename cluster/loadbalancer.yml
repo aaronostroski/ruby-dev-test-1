@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ruby-dev-test-1-load-balancer
+  namespace: ns-ruby-dev-test-1
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: external
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+    service.beta.kubernetes.io/aws-load-balancer-subnets: subnet-0e220476f23e9065b, subnet-0ebaa0bb9aba828e1, subnet-00912b31429779867
+spec:
+  type: LoadBalancer
+  selector:
+    app: ruby-dev-test-1-deployment
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

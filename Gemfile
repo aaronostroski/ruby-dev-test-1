@@ -69,3 +69,4 @@ group :development do
 end
 
 gem "good_job", "~> 4.5"
+gem "ancestry"

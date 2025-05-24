@@ -1,22 +1,22 @@
 class UpdateFolder < ApplicationAction
-  attr_accessor :name, :description, :folder_id, :parent_folder_id
+  attr_accessor :name, :description, :folder_id, :parent_id
 
   validate :folder_should_be_valid
-  validate :parent_folder_should_exist, if: -> { parent_folder_id.present? }
+  validate :parent_should_exist, if: -> { parent_id.present? }
 
   def run
     folder.save!
   end
 
-  def parent_folder
-    @parent_folder ||= Folder.find_by(id: parent_folder_id)
+  def parent
+    @parent ||= Folder.find_by(id: parent_id)
   end
 
   def folder
     @folder ||= Folder.find(folder_id).tap do |folder|
       folder.name = name
       folder.description = description
-      folder.parent_folder = parent_folder
+      folder.parent = parent
     end
   end
 
@@ -26,7 +26,7 @@ class UpdateFolder < ApplicationAction
     errors.merge!(folder.errors) unless folder.valid?
   end
 
-  def parent_folder_should_exist
-    errors.add(:base, :parent_folder_not_found) unless parent_folder.present?
+  def parent_should_exist
+    errors.add(:base, :parent_not_found) unless parent.present?
   end
 end
