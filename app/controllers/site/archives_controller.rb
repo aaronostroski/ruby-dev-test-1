@@ -1,3 +1,5 @@
+require "ostruct"
+
 class Site::ArchivesController < SiteController
   before_action :set_archive, only: [ :edit, :update, :destroy, :download ]
   before_action :set_filters, only: [ :new ]

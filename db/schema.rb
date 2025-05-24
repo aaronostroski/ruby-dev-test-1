@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_23_192639) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_24_004424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -48,7 +48,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_23_192639) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "size", precision: 10, scale: 2, default: "0.0"
+    t.decimal "size", precision: 15, scale: 2, default: "0.0"
     t.string "content_type"
     t.index ["folder_id"], name: "index_archives_on_folder_id"
   end
@@ -56,7 +56,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_23_192639) do
   create_table "export_files", force: :cascade do |t|
     t.bigint "folder_id", null: false
     t.string "filename"
-    t.decimal "size"
+    t.decimal "size", precision: 15, scale: 2
     t.datetime "requested_at"
     t.datetime "started_at"
     t.datetime "finished_at"
